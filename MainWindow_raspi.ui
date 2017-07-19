@@ -144,7 +144,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QLabel" name="LB_welcomeText">
@@ -404,36 +404,10 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="SC_danger">
-     <widget class="QWebView" name="webView">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>480</width>
-        <height>271</height>
-       </rect>
-      </property>
-      <property name="url">
-       <url>
-        <string>http://m.srf.ch/meteo</string>
-       </url>
-      </property>
-      <property name="zoomFactor">
-       <double>0.750000000000000</double>
-      </property>
-     </widget>
-    </widget>
+    <widget class="QWidget" name="SC_danger"/>
    </widget>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
