@@ -92,6 +92,7 @@ if __name__ == '__main__':
     ui.BT_openSonosScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(1))
     ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
     ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))
+    ui.BT_openMeteoScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(4))
     MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
     MainWindow.show()
     sys.exit(app.exec_())

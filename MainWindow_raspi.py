@@ -109,6 +109,13 @@ class Ui_MainWindow(object):
         self.TE_Debug.setGeometry(QtCore.QRect(10, 0, 461, 221))
         self.TE_Debug.setObjectName("TE_Debug")
         self.ST_workerStack.addWidget(self.SC_log)
+        self.SC_danger = QtWidgets.QWidget()
+        self.SC_danger.setObjectName("SC_danger")
+        self.webView = QtWebKitWidgets.QWebView(self.SC_danger)
+        self.webView.setGeometry(QtCore.QRect(9, 9, 461, 211))
+        self.webView.setUrl(QtCore.QUrl("http://m.srf.ch/meteo"))
+        self.webView.setObjectName("webView")
+        self.ST_workerStack.addWidget(self.SC_danger)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 481, 51))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
@@ -128,6 +135,9 @@ class Ui_MainWindow(object):
         self.BT_openWeatherScreen = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BT_openWeatherScreen.setObjectName("BT_openWeatherScreen")
         self.TopSelectionBar.addWidget(self.BT_openWeatherScreen)
+        self.BT_openMeteoScreen = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.BT_openMeteoScreen.setObjectName("BT_openMeteoScreen")
+        self.TopSelectionBar.addWidget(self.BT_openMeteoScreen)
         self.BT_openLogScreen = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BT_openLogScreen.setObjectName("BT_openLogScreen")
         self.TopSelectionBar.addWidget(self.BT_openLogScreen)
@@ -154,7 +164,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.ST_workerStack.setCurrentIndex(3)
+        self.ST_workerStack.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -174,5 +184,7 @@ class Ui_MainWindow(object):
         self.BT_openHomeScreen.setText(_translate("MainWindow", "HOME"))
         self.BT_openSonosScreen.setText(_translate("MainWindow", "SONOS"))
         self.BT_openWeatherScreen.setText(_translate("MainWindow", "WETTER"))
+        self.BT_openMeteoScreen.setText(_translate("MainWindow", "METEO"))
         self.BT_openLogScreen.setText(_translate("MainWindow", "LOG"))
 
+from PyQt5 import QtWebKitWidgets

@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QLabel" name="LB_welcomeText">
@@ -296,6 +296,23 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="SC_danger">
+     <widget class="QWebView" name="webView">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>461</width>
+        <height>211</height>
+       </rect>
+      </property>
+      <property name="url">
+       <url>
+        <string>http://m.srf.ch/meteo</string>
+       </url>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
@@ -340,6 +357,13 @@
         <widget class="QPushButton" name="BT_openWeatherScreen">
          <property name="text">
           <string>WETTER</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="BT_openMeteoScreen">
+         <property name="text">
+          <string>METEO</string>
          </property>
         </widget>
        </item>
@@ -405,6 +429,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKitWidgets/QWebView</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
