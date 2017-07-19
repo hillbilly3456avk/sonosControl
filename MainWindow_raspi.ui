@@ -29,14 +29,14 @@
    <widget class="QStackedWidget" name="ST_workerStack">
     <property name="geometry">
      <rect>
-      <x>-1</x>
-      <y>39</y>
+      <x>0</x>
+      <y>50</y>
       <width>481</width>
-      <height>231</height>
+      <height>221</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QLabel" name="LB_welcomeText">
@@ -57,8 +57,8 @@
      <widget class="QLabel" name="LB_sonosScreen">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>120</y>
+        <x>10</x>
+        <y>10</y>
         <width>141</width>
         <height>16</height>
        </rect>
@@ -67,20 +67,221 @@
        <string>This is the sonos screen</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="SC_weatherScreen">
-     <widget class="QLabel" name="LB_weatherScreen">
+     <widget class="QPushButton" name="BT_sonosPlay">
       <property name="geometry">
        <rect>
-        <x>180</x>
+        <x>10</x>
+        <y>40</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Play</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="SL_volume">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>40</y>
+        <width>19</width>
+        <height>160</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="BT_mute">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Mute</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="BT_stop">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
         <y>120</y>
-        <width>141</width>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stop</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="BT_skip">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>80</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Skip</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="LB_currentlyPlaying">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>170</y>
+        <width>281</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>This is the weather screen</string>
+       <string>currently playing...</string>
       </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="SC_weatherScreen">
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>481</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="LB_weatherScreen">
+           <property name="text">
+            <string>This is the weather screen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="1" column="1">
+          <widget class="QLabel" name="LB_oldFreezer">
+           <property name="text">
+            <string>Temp alter Gefrierschrank</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="LB_newFreezer">
+           <property name="text">
+            <string>Temp neuer Gefrierschrank</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="LB_internalTemp">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>internal Temp</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QLCDNumber" name="LCD_newFreezer">
+           <property name="value" stdset="0">
+            <double>-16.199999999999999</double>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLCDNumber" name="LCD_piTemp">
+           <property name="smallDecimalPoint">
+            <bool>true</bool>
+           </property>
+           <property name="intValue" stdset="0">
+            <number>40</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLCDNumber" name="LCD_oldFreezer">
+           <property name="value" stdset="0">
+            <double>-15.500000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>
@@ -96,6 +297,19 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <layout class="QHBoxLayout" name="TopSelectionBar">
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item>
         <widget class="QPushButton" name="BT_openHomeScreen">
          <property name="text">
@@ -159,9 +373,6 @@
      </item>
     </layout>
    </widget>
-   <zorder>ST_workerStack</zorder>
-   <zorder>horizontalLayoutWidget</zorder>
-   <zorder>verticalLayoutWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
