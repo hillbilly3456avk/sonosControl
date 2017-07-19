@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QLabel" name="LB_welcomeText">
@@ -284,6 +284,18 @@
       </layout>
      </widget>
     </widget>
+    <widget class="QWidget" name="SC_log">
+     <widget class="QTextEdit" name="TE_Debug">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>461</width>
+        <height>221</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
@@ -328,6 +340,13 @@
         <widget class="QPushButton" name="BT_openWeatherScreen">
          <property name="text">
           <string>WETTER</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="BT_openLogScreen">
+         <property name="text">
+          <string>LOG</string>
          </property>
         </widget>
        </item>
