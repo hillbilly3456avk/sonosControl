@@ -144,7 +144,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QLabel" name="LB_welcomeText">
@@ -178,7 +178,7 @@
      <widget class="QPushButton" name="BT_sonosPlay">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>100</x>
         <y>40</y>
         <width>75</width>
         <height>23</height>
@@ -197,27 +197,30 @@
         <height>160</height>
        </rect>
       </property>
+      <property name="value">
+       <number>14</number>
+      </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
      </widget>
-     <widget class="QPushButton" name="BT_mute">
+     <widget class="QPushButton" name="BT_pause">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>100</x>
         <y>80</y>
         <width>75</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
-       <string>Mute</string>
+       <string>Pause</string>
       </property>
      </widget>
      <widget class="QPushButton" name="BT_stop">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>100</x>
         <y>120</y>
         <width>75</width>
         <height>23</height>
@@ -230,14 +233,14 @@
      <widget class="QPushButton" name="BT_skip">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>190</x>
         <y>80</y>
         <width>75</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
-       <string>Skip</string>
+       <string>Next</string>
       </property>
      </widget>
      <widget class="QLabel" name="LB_currentlyPlaying">
@@ -251,6 +254,19 @@
       </property>
       <property name="text">
        <string>currently playing...</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="BT_previous">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Previous</string>
       </property>
      </widget>
     </widget>

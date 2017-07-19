@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QTimer
 
 from MainWindow_raspi import Ui_MainWindow
 from PyQt5.QtGui import QDesktopServices
@@ -8,6 +9,8 @@ import sys
 import datetime
 import os as os
 import logging
+
+import soco
 
 class QPlainTextEditLogger(logging.Handler):
     """create a logger class that emits to the TE_Debug field in Gui
@@ -70,7 +73,53 @@ def createLogger(logFile):
     logger = logging.getLogger(__name__)
     logger.info('---end of logger create function---')
     return logger
-
+	
+class SonosInterface():
+  myZone=0
+  activeSpeaker=0
+  def __init__(self, ui):
+    SonosInterface.myZone = list(soco.discover())
+    SonosInterface.activeSpeaker = 0
+  def displayMyZone(self):
+    print(self.myZone[self.activeSpeaker])
+  def selectLineIn(self):
+    self.myZone[self.activeSpeaker].switchto_line_in()
+  def selectTv(self):
+    self.myZone[self.activeSpeaker].switch_to_tv()
+  def playMusic(self):
+    self.myZone[self.activeSpeaker].play()
+  def stopMusic(self):
+    self.myZone[self.activeSpeaker].stop()
+  def muteMusic(self):
+    self.myZone[self.activeSpeaker].mute(True)
+  def pauseMusic(self):
+    self.myZone[self.activeSpeaker].pause()  
+  def skipMusic(self):
+    self.myZone[self.activeSpeaker].next() 
+  def previousMusic(self):
+    self.myZone[self.activeSpeaker].previous()     
+  def setVolume(self, vol):
+    self.myZone[self.activeSpeaker].volume=vol
+  def getVolume(self):
+    return self.myZone[self.activeSpeaker].volume
+  def volumeUp(self):
+    vol=self.myZone[self.activeSpeaker].volume
+    self.myZone[self.activeSpeaker].volume=vol+5
+  def volumeDown(self):
+    vol=self.myZone[self.activeSpeaker].volume
+    vol=min(vol, 0)
+    self.myZone[self.activeSpeaker].volume=vol-5
+  def get_current_track_info(self):
+    info=self.myZone[self.activeSpeaker].get_current_track_info()
+    ui.LB_currentlyPlaying.setText(str(info))
+  def printMyZone(self):
+    for speaker in speakers:
+      print(speaker.player_name, speaker.ip_address)
+  def selectWohnzimmer(self):
+    for speaker in speakers:
+      if speaker.player_name=="Wohnzimmer":
+        self.activeSpeaker = 0
+		
 if __name__ == '__main__':
     #logger = createLogger("myFirstTask.log")
     app = QtWidgets.QApplication(sys.argv)
@@ -78,6 +127,8 @@ if __name__ == '__main__':
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+	
+    myMusicPlayer=SonosInterface(ui)
     
     logTextBox = QPlainTextEditLogger(ui)
     logTextBox.setFormatter(logging.Formatter('%(funcName)-12s: %(levelname)-8s %(message)s'))
@@ -88,12 +139,29 @@ if __name__ == '__main__':
     logging.info('Here we are')
     logging.error('Oops')
     
+    
+    
     ui.ST_workerStack.setCurrentIndex(0)
     ui.BT_openHomeScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(0))
     ui.BT_openSonosScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(1))
     ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
     ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))
     ui.BT_openMeteoScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(4))
+    ui.BT_sonosPlay.clicked.connect(lambda: myMusicPlayer.playMusic())
+    ui.BT_stop.clicked.connect(lambda: myMusicPlayer.stopMusic())
+    ui.BT_pause.clicked.connect(lambda: myMusicPlayer.pauseMusic())
+    ui.BT_skip.clicked.connect(lambda: myMusicPlayer.skipMusic())
+    ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic())
+    ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value()))
+    
+    myTimer =QtCore.QTimer()
+    myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
+    myTimer.start(6000)
+    
+    volume = myMusicPlayer.getVolume()
+    print(volume)
+    ui.SL_volume.setValue(volume)
+    
     MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
     
     MainWindow.show()
