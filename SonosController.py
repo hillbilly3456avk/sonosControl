@@ -9,6 +9,7 @@ import sys
 import datetime
 import os as os
 import logging
+import time
 
 import soco
 
@@ -154,7 +155,22 @@ if __name__ == '__main__':
     #ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic())
     #ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value()))
     
-    ui.WD_browser.load(QUrl("http://m.srf.ch/meteo"))
+    #ui.WD_browser.load(QUrl("http://m.srf.ch/meteo"))
+    ui.WD_browser.load(QUrl("http://mobile2.derbund.ch/"))
+    ui.WD_browser.load(QUrl("https://www.sbb.ch"))
+    myTime = time.gmtime()
+    myYear=myTime.tm_year
+    myMonth=myTime.tm_mon
+    myDay=myTime.tm_mday
+    myHour=myTime.tm_hour
+    myMin=myTime.tm_min
+    myDate=(str(myDay)+"."+str(myMonth)+"."+str(myYear))
+    myCurTime=(str(myHour)+":"+str(myMin))
+    print("th type is: ", type(myDate))
+    print(myCurTime)
+    myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern&datum=" + myDate + "&zeit=" + myCurTime + "&suche=true")
+    myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&datum=" + myDate + "&zeit=" + myCurTime + "&suche=true")
+    ui.WD_browser.load(myUrl)
     
     myTimer =QtCore.QTimer()
     #myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
