@@ -169,6 +169,10 @@ if __name__ == '__main__':
     myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern&datum=" + myDate + "&zeit=" + myCurTime + "&suche=true")
     myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&datum=" + myDate + "&zeit=" + myCurTime + "&suche=true")
     ui.WD_browser.load(myUrl)
+    file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
+    '''the clock'''
+    local_url = QUrl.fromLocalFile(file_path)
+    ui.WD_clock.load(local_url)
     
     myTimer =QtCore.QTimer()
     #myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
