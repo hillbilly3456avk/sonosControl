@@ -148,6 +148,10 @@ class Ui_MainWindow(object):
         self.WD_clock = QtWidgets.QWidget(self.SC_welcomeScreen)
         self.WD_clock.setGeometry(QtCore.QRect(9, 9, 451, 251))
         self.WD_clock.setObjectName("WD_clock")
+        self.webView_2 = QtWebKitWidgets.QWebView(self.WD_clock)
+        self.webView_2.setGeometry(QtCore.QRect(-1, -1, 451, 251))
+        self.webView_2.setUrl(QtCore.QUrl("qrc:/newPrefix/index.html"))
+        self.webView_2.setObjectName("webView_2")
         self.ST_workerStack.addWidget(self.SC_welcomeScreen)
         self.SC_sonosScreen = QtWidgets.QWidget()
         self.SC_sonosScreen.setObjectName("SC_sonosScreen")
@@ -308,7 +312,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.ST_workerStack.setCurrentIndex(4)
+        self.ST_workerStack.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -336,3 +340,4 @@ class Ui_MainWindow(object):
         self.BT_breitsch.setText(_translate("MainWindow", "Breitsch"))
 
 from PyQt5 import QtWebKitWidgets
+import clock_rc
