@@ -150,7 +150,7 @@ class Ui_MainWindow(object):
         self.WD_clock.setObjectName("WD_clock")
         self.webView_2 = QtWebKitWidgets.QWebView(self.WD_clock)
         self.webView_2.setGeometry(QtCore.QRect(-1, -1, 451, 251))
-        self.webView_2.setUrl(QtCore.QUrl("qrc:/newPrefix/index.html"))
+        self.webView_2.setUrl(QtCore.QUrl("about:blank"))
         self.webView_2.setObjectName("webView_2")
         self.ST_workerStack.addWidget(self.SC_welcomeScreen)
         self.SC_sonosScreen = QtWidgets.QWidget()
