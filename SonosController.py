@@ -120,7 +120,41 @@ class SonosInterface():
     for speaker in speakers:
       if speaker.player_name=="Wohnzimmer":
         self.activeSpeaker = 0
-		
+
+class openBrowserWidget():
+    def __init__(self, ui):
+        Ui=ui
+    def openHb(self):
+        ui.ST_workerStack.setCurrentIndex(6)
+        timeDate=self.getTimeDate()
+        myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
+        ui.WD_hb.load(myUrl)
+    def openBreitsch(self):
+        ui.ST_workerStack.setCurrentIndex(8)
+        timeDate=self.getTimeDate()
+        myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Wylerbad&nach=Bern+Breitenrainplatz&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
+        ui.WD_breitsch.load(myUrl)
+    def openWankdorf(self):
+        ui.ST_workerStack.setCurrentIndex(7)
+        timeDate=self.getTimeDate()
+        myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
+        ui.WD_wankdorf.load(myUrl)
+    def openMeteo(self):
+        myUrl=QUrl("https://m.srf.ch/meteo")
+        ui.WD_browser.load(myUrl)
+    def getTimeDate(self):
+        myTime = time.gmtime()
+        myYear=myTime.tm_year
+        myMonth=myTime.tm_mon
+        myDay=myTime.tm_mday
+        myHour=myTime.tm_hour
+        myMin=myTime.tm_min
+        myDate=(str(myDay)+"."+str(myMonth)+"."+str(myYear))
+        myCurTime=(str(myHour)+":"+str(myMin))
+        return [myDate, myCurTime]
+    
+    
+        
 if __name__ == '__main__':
     #logger = createLogger("myFirstTask.log")
     app = QtWidgets.QApplication(sys.argv)
@@ -129,7 +163,9 @@ if __name__ == '__main__':
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     
-    #myMusicPlayer=SonosInterface(ui)
+    myMusicPlayer=SonosInterface(ui)
+    
+    openBrowser=openBrowserWidget(ui)
     
     logTextBox = QPlainTextEditLogger(ui)
     logTextBox.setFormatter(logging.Formatter('%(funcName)-12s: %(levelname)-8s %(message)s'))
@@ -146,40 +182,33 @@ if __name__ == '__main__':
     ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
     ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))
     ui.BT_openMeteoScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(4))
-    #ui.BT_sonosPlay.clicked.connect(lambda: myMusicPlayer.playMusic())
-    #ui.BT_stop.clicked.connect(lambda: myMusicPlayer.stopMusic())
-    #ui.BT_pause.clicked.connect(lambda: myMusicPlayer.pauseMusic())
-    #ui.BT_skip.clicked.connect(lambda: myMusicPlayer.skipMusic())
-    #ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic())
-    #ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value()))
+    ui.BT_openMeteoScreen.clicked.connect(lambda: openBrowser.openMeteo())
+    ui.BT_openSbbScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(5))
     
-    #ui.WD_browser.load(QUrl("http://m.srf.ch/meteo"))
-    ui.WD_browser.load(QUrl("http://mobile2.derbund.ch/"))
-    ui.WD_browser.load(QUrl("https://www.sbb.ch"))
-    myTime = time.gmtime()
-    myYear=myTime.tm_year
-    myMonth=myTime.tm_mon
-    myDay=myTime.tm_mday
-    myHour=myTime.tm_hour
-    myMin=myTime.tm_min
-    myDate=(str(myDay)+"."+str(myMonth)+"."+str(myYear))
-    myCurTime=(str(myHour)+":"+str(myMin))
-    print("th type is: ", type(myDate))
-    print(myCurTime)
-    myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern&datum=" + myDate + "&zeit=" + myCurTime + "&suche=true")
-    myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&datum=" + myDate + "&zeit=" + myCurTime + "&suche=true")
-    ui.WD_browser.load(myUrl)
+    ui.BT_hb.clicked.connect(lambda: openBrowser.openHb())
+    ui.BT_breitsch.clicked.connect(lambda: openBrowser.openBreitsch())
+    ui.BT_wankdorf.clicked.connect(lambda: openBrowser.openWankdorf())
+    
+        
+    ui.BT_sonosPlay.clicked.connect(lambda: myMusicPlayer.playMusic())
+    ui.BT_stop.clicked.connect(lambda: myMusicPlayer.stopMusic())
+    ui.BT_pause.clicked.connect(lambda: myMusicPlayer.pauseMusic())
+    ui.BT_skip.clicked.connect(lambda: myMusicPlayer.skipMusic())
+    ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic())
+    ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value()))
+    
     file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
+    
     '''the clock'''
     local_url = QUrl.fromLocalFile(file_path)
     ui.WD_clock.load(local_url)
     
     myTimer =QtCore.QTimer()
-    #myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
+    myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
     myTimer.start(6000)
     
     volume=50
-    #volume = myMusicPlayer.getVolume()
+    volume = myMusicPlayer.getVolume()
     ui.SL_volume.setValue(volume)
     
     MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)

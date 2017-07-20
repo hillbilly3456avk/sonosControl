@@ -273,7 +273,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="BT_sbb">
+        <widget class="QPushButton" name="BT_openSbbScreen">
          <property name="text">
           <string>SBB</string>
          </property>
@@ -399,7 +399,7 @@
      </palette>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QWebEngineView" name="WD_clock" native="true">
@@ -439,6 +439,9 @@
       <property name="text">
        <string>Play</string>
       </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QSlider" name="SL_volume">
       <property name="geometry">
@@ -449,11 +452,20 @@
         <height>160</height>
        </rect>
       </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <property name="value">
        <number>14</number>
       </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
+      </property>
+      <property name="tickPosition">
+       <enum>QSlider::NoTicks</enum>
+      </property>
+      <property name="tickInterval">
+       <number>0</number>
       </property>
      </widget>
      <widget class="QPushButton" name="BT_pause">
@@ -468,6 +480,9 @@
       <property name="text">
        <string>Pause</string>
       </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QPushButton" name="BT_stop">
       <property name="geometry">
@@ -481,6 +496,9 @@
       <property name="text">
        <string>Stop</string>
       </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QPushButton" name="BT_skip">
       <property name="geometry">
@@ -493,6 +511,9 @@
       </property>
       <property name="text">
        <string>Next</string>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="LB_currentlyPlaying">
@@ -519,6 +540,9 @@
       </property>
       <property name="text">
        <string>Previous</string>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -709,12 +733,92 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="SC_danger">
+    <widget class="QWidget" name="SC_meteo">
      <widget class="QWebEngineView" name="WD_browser" native="true">
       <property name="geometry">
        <rect>
         <x>9</x>
         <y>9</y>
+        <width>461</width>
+        <height>251</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="SC_sbb">
+     <widget class="QWidget" name="gridLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>9</y>
+        <width>461</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="BT_hb">
+         <property name="text">
+          <string>Bahnhof</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="BT_wankdorf">
+         <property name="text">
+          <string>Wankdorf</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="BT_breitsch">
+         <property name="text">
+          <string>Breitsch</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="SC_hb">
+     <widget class="QWebEngineView" name="WD_hb" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>461</width>
+        <height>251</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="SC_wankdorf">
+     <widget class="QWebEngineView" name="WD_wankdorf" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>461</width>
+        <height>251</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="SC_breitsch">
+     <widget class="QWebEngineView" name="WD_breitsch" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
         <width>461</width>
         <height>251</height>
        </rect>
