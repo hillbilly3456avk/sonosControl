@@ -128,20 +128,20 @@ class openBrowserWidget():
         ui.ST_workerStack.setCurrentIndex(6)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
-        ui.WD_hb.load(myUrl)
+        #ui.WD_hb.load(myUrl)
     def openBreitsch(self):
         ui.ST_workerStack.setCurrentIndex(8)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Wylerbad&nach=Bern+Breitenrainplatz&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
-        ui.WD_breitsch.load(myUrl)
+        #ui.WD_breitsch.load(myUrl)
     def openWankdorf(self):
         ui.ST_workerStack.setCurrentIndex(7)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
-        ui.WD_wankdorf.load(myUrl)
+        #ui.WD_wankdorf.load(myUrl)
     def openMeteo(self):
         myUrl=QUrl("https://m.srf.ch/meteo")
-        ui.WD_browser.load(myUrl)
+        #ui.WD_browser.load(myUrl)
     def getTimeDate(self):
         myTime = time.gmtime()
         myYear=myTime.tm_year
@@ -201,7 +201,7 @@ if __name__ == '__main__':
     
     '''the clock'''
     local_url = QUrl.fromLocalFile(file_path)
-    ui.WD_clock.load(local_url)
+    #ui.WD_clock.load(local_url)
     
     myTimer =QtCore.QTimer()
     myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
