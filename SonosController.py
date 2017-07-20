@@ -140,8 +140,6 @@ if __name__ == '__main__':
     logging.info('Here we are')
     logging.error('Oops')
     
-    
-    
     ui.ST_workerStack.setCurrentIndex(0)
     ui.BT_openHomeScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(0))
     ui.BT_openSonosScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(1))
