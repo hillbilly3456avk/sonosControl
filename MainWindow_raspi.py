@@ -261,6 +261,10 @@ class Ui_MainWindow(object):
         self.WD_browser = QtWidgets.QWidget(self.SC_meteo)
         self.WD_browser.setGeometry(QtCore.QRect(9, 9, 461, 251))
         self.WD_browser.setObjectName("WD_browser")
+        self.webView = QtWebKitWidgets.QWebView(self.WD_browser)
+        self.webView.setGeometry(QtCore.QRect(-1, -1, 461, 261))
+        self.webView.setUrl(QtCore.QUrl("http://m.srf.ch/meteo"))
+        self.webView.setObjectName("webView")
         self.ST_workerStack.addWidget(self.SC_meteo)
         self.SC_sbb = QtWidgets.QWidget()
         self.SC_sbb.setObjectName("SC_sbb")
@@ -304,7 +308,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.ST_workerStack.setCurrentIndex(0)
+        self.ST_workerStack.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -331,3 +335,4 @@ class Ui_MainWindow(object):
         self.BT_wankdorf.setText(_translate("MainWindow", "Wankdorf"))
         self.BT_breitsch.setText(_translate("MainWindow", "Breitsch"))
 
+from PyQt5 import QtWebKitWidgets
