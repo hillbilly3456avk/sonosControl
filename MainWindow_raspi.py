@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'MainWindow_raspi.ui'
+# Form implementation generated from reading ui file 'Mainwindow_raspi.ui'
 #
-# Created by: PyQt5 UI code generator 5.6
+# Created by: PyQt5 UI code generator 5.9
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -215,11 +215,15 @@ class Ui_MainWindow(object):
         self.TE_Debug.setObjectName("TE_Debug")
         self.ST_workerStack.addWidget(self.SC_log)
         self.SC_danger = QtWidgets.QWidget()
+        self.SC_danger.setObjectName("SC_danger")
+        self.WD_browser = QtWebEngineWidgets.QWebEngineView(self.SC_danger)
+        self.WD_browser.setGeometry(QtCore.QRect(9, 9, 451, 251))
+        self.WD_browser.setObjectName("WD_browser")
         self.ST_workerStack.addWidget(self.SC_danger)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.ST_workerStack.setCurrentIndex(1)
+        self.ST_workerStack.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -243,3 +247,4 @@ class Ui_MainWindow(object):
         self.LB_newFreezer.setText(_translate("MainWindow", "Temp neuer Gefrierschrank"))
         self.LB_internalTemp.setText(_translate("MainWindow", "internal Temp"))
 
+from PyQt5 import QtWebEngineWidgets

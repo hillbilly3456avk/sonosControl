@@ -302,7 +302,7 @@
      </palette>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QLabel" name="LB_welcomeText">
@@ -616,31 +616,28 @@
      </widget>
     </widget>
     <widget class="QWidget" name="SC_danger">
-     <widget class="QWebView" name="webView">
+     <widget class="QWebEngineView" name="WD_browser" native="true">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>480</width>
-        <height>271</height>
+        <x>9</x>
+        <y>9</y>
+        <width>451</width>
+        <height>251</height>
        </rect>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="url">
-       <url>
-        <string>http://m.srf.ch/meteo</string>
-       </url>
-      </property>
-      <property name="zoomFactor">
-       <double>0.750000000000000</double>
       </property>
      </widget>
     </widget>
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header location="global">qwebengineview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, QUrl
 
 from MainWindow_raspi import Ui_MainWindow
 from PyQt5.QtGui import QDesktopServices
@@ -128,7 +128,7 @@ if __name__ == '__main__':
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     
-    myMusicPlayer=SonosInterface(ui)
+    #myMusicPlayer=SonosInterface(ui)
     
     logTextBox = QPlainTextEditLogger(ui)
     logTextBox.setFormatter(logging.Formatter('%(funcName)-12s: %(levelname)-8s %(message)s'))
@@ -147,19 +147,21 @@ if __name__ == '__main__':
     ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
     ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))
     ui.BT_openMeteoScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(4))
-    ui.BT_sonosPlay.clicked.connect(lambda: myMusicPlayer.playMusic())
-    ui.BT_stop.clicked.connect(lambda: myMusicPlayer.stopMusic())
-    ui.BT_pause.clicked.connect(lambda: myMusicPlayer.pauseMusic())
-    ui.BT_skip.clicked.connect(lambda: myMusicPlayer.skipMusic())
-    ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic())
-    ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value()))
+    #ui.BT_sonosPlay.clicked.connect(lambda: myMusicPlayer.playMusic())
+    #ui.BT_stop.clicked.connect(lambda: myMusicPlayer.stopMusic())
+    #ui.BT_pause.clicked.connect(lambda: myMusicPlayer.pauseMusic())
+    #ui.BT_skip.clicked.connect(lambda: myMusicPlayer.skipMusic())
+    #ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic())
+    #ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value()))
+    
+    ui.WD_browser.load(QUrl("http://m.srf.ch/meteo"))
     
     myTimer =QtCore.QTimer()
-    myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
+    #myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
     myTimer.start(6000)
     
     volume=50
-    volume = myMusicPlayer.getVolume()
+    #volume = myMusicPlayer.getVolume()
     ui.SL_volume.setValue(volume)
     
     MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
