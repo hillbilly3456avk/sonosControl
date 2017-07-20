@@ -212,7 +212,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>482</width>
+      <width>496</width>
       <height>51</height>
      </rect>
     </property>
@@ -237,12 +237,18 @@
          <property name="text">
           <string>HOME</string>
          </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="BT_openSonosScreen">
          <property name="text">
           <string>SONOS</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -251,6 +257,9 @@
          <property name="text">
           <string>WETTER</string>
          </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -258,12 +267,40 @@
          <property name="text">
           <string>METEO</string>
          </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="BT_sbb">
+         <property name="text">
+          <string>SBB</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="BT_openLogScreen">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="text">
           <string>LOG</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
