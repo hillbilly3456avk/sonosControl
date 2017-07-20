@@ -127,7 +127,7 @@ if __name__ == '__main__':
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-	
+    
     myMusicPlayer=SonosInterface(ui)
     
     logTextBox = QPlainTextEditLogger(ui)
@@ -158,8 +158,8 @@ if __name__ == '__main__':
     myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
     myTimer.start(6000)
     
+    volume=50
     volume = myMusicPlayer.getVolume()
-    print(volume)
     ui.SL_volume.setValue(volume)
     
     MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
