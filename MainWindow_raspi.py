@@ -83,7 +83,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.TopSelectionBar = QtWidgets.QHBoxLayout()
         self.TopSelectionBar.setObjectName("TopSelectionBar")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.TopSelectionBar.addItem(spacerItem)
         self.BT_openHomeScreen = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BT_openHomeScreen.setFlat(True)
