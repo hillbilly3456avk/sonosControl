@@ -399,10 +399,10 @@
      </palette>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
-     <widget class="QWebEngineView" name="WD_clock" native="true">
+     <widget class="QWidget" name="WD_clock" native="true">
       <property name="geometry">
        <rect>
         <x>9</x>
@@ -734,7 +734,7 @@
      </widget>
     </widget>
     <widget class="QWidget" name="SC_meteo">
-     <widget class="QWebEngineView" name="WD_browser" native="true">
+     <widget class="QWidget" name="WD_browser" native="true">
       <property name="geometry">
        <rect>
         <x>9</x>
@@ -743,6 +743,21 @@
         <height>251</height>
        </rect>
       </property>
+      <widget class="QWebView" name="webView">
+       <property name="geometry">
+        <rect>
+         <x>-1</x>
+         <y>-1</y>
+         <width>461</width>
+         <height>261</height>
+        </rect>
+       </property>
+       <property name="url">
+        <url>
+         <string>http://m.srf.ch/meteo</string>
+        </url>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="SC_sbb">
@@ -790,7 +805,7 @@
      </widget>
     </widget>
     <widget class="QWidget" name="SC_hb">
-     <widget class="QWebEngineView" name="WD_hb" native="true">
+     <widget class="QWidget" name="WD_hb" native="true">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -802,7 +817,7 @@
      </widget>
     </widget>
     <widget class="QWidget" name="SC_wankdorf">
-     <widget class="QWebEngineView" name="WD_wankdorf" native="true">
+     <widget class="QWidget" name="WD_wankdorf" native="true">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -814,7 +829,7 @@
      </widget>
     </widget>
     <widget class="QWidget" name="SC_breitsch">
-     <widget class="QWebEngineView" name="WD_breitsch" native="true">
+     <widget class="QWidget" name="WD_breitsch" native="true">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -830,10 +845,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QWebEngineView</class>
+   <class>QWebView</class>
    <extends>QWidget</extends>
-   <header location="global">qwebengineview.h</header>
-   <container>1</container>
+   <header>QtWebKitWidgets/QWebView</header>
   </customwidget>
  </customwidgets>
  <resources/>
