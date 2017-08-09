@@ -423,11 +423,6 @@
          <height>251</height>
         </rect>
        </property>
-       <property name="url">
-        <url>
-         <string>file:///D:/100_tmp/github_new/sonosController/index.html</string>
-        </url>
-       </property>
       </widget>
      </widget>
     </widget>
@@ -843,7 +838,7 @@
        </property>
        <property name="url">
         <url>
-         <string>https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&amp;nach=Bern&amp;suche=true</string>
+         <string>https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml</string>
         </url>
        </property>
       </widget>
@@ -897,7 +892,7 @@
        </property>
        <property name="url">
         <url>
-         <string>https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Wylerbad&amp;nach=Bern+Breitenrainplatz&amp;suche=true</string>
+         <string>https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml</string>
         </url>
        </property>
       </widget>
