@@ -399,7 +399,7 @@
      </palette>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QWidget" name="WD_clock" native="true">
@@ -743,7 +743,7 @@
         <height>251</height>
        </rect>
       </property>
-      <widget class="QWebView" name="webView">
+      <widget class="QWebView" name="WV_srfMeteo">
        <property name="geometry">
         <rect>
          <x>-1</x>
@@ -814,6 +814,21 @@
         <height>251</height>
        </rect>
       </property>
+      <widget class="QWebView" name="WV_sbbHB">
+       <property name="geometry">
+        <rect>
+         <x>-1</x>
+         <y>-1</y>
+         <width>461</width>
+         <height>261</height>
+        </rect>
+       </property>
+       <property name="url">
+        <url>
+         <string>about:blank</string>
+        </url>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="SC_wankdorf">
@@ -826,6 +841,21 @@
         <height>251</height>
        </rect>
       </property>
+      <widget class="QWebView" name="WV_sbbWankdorf">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>461</width>
+         <height>251</height>
+        </rect>
+       </property>
+       <property name="url">
+        <url>
+         <string>https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&amp;nach=Bern+Wankdor</string>
+        </url>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="SC_breitsch">
@@ -838,6 +868,21 @@
         <height>251</height>
        </rect>
       </property>
+      <widget class="QWebView" name="WV_sbbBreitsch">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>461</width>
+         <height>251</height>
+        </rect>
+       </property>
+       <property name="url">
+        <url>
+         <string>https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Wylerbad&amp;nach=Bern+Breitenrainplatz&amp;datum</string>
+        </url>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>
