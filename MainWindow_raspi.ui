@@ -212,7 +212,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>621</width>
+      <width>661</width>
       <height>51</height>
      </rect>
     </property>
@@ -224,9 +224,12 @@
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
+           <width>20</width>
            <height>20</height>
           </size>
          </property>
@@ -309,9 +312,12 @@
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
+           <width>190</width>
            <height>20</height>
           </size>
          </property>
