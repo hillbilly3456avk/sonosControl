@@ -146,8 +146,12 @@ class Ui_MainWindow(object):
         self.SC_welcomeScreen = QtWidgets.QWidget()
         self.SC_welcomeScreen.setObjectName("SC_welcomeScreen")
         self.WD_clock = QtWidgets.QWidget(self.SC_welcomeScreen)
-        self.WD_clock.setGeometry(QtCore.QRect(9, 9, 451, 251))
+        self.WD_clock.setGeometry(QtCore.QRect(9, 9, 471, 251))
         self.WD_clock.setObjectName("WD_clock")
+        self.WV_clock = QtWebKitWidgets.QWebView(self.WD_clock)
+        self.WV_clock.setGeometry(QtCore.QRect(0, 0, 461, 251))
+        self.WV_clock.setUrl(QtCore.QUrl("file:///D:/100_tmp/github_new/sonosController/index.html"))
+        self.WV_clock.setObjectName("WV_clock")
         self.ST_workerStack.addWidget(self.SC_welcomeScreen)
         self.SC_sonosScreen = QtWidgets.QWidget()
         self.SC_sonosScreen.setObjectName("SC_sonosScreen")
@@ -293,8 +297,8 @@ class Ui_MainWindow(object):
         self.WD_hb.setGeometry(QtCore.QRect(10, 10, 461, 251))
         self.WD_hb.setObjectName("WD_hb")
         self.WV_sbbHB = QtWebKitWidgets.QWebView(self.WD_hb)
-        self.WV_sbbHB.setGeometry(QtCore.QRect(-1, -1, 461, 261))
-        self.WV_sbbHB.setUrl(QtCore.QUrl("about:blank"))
+        self.WV_sbbHB.setGeometry(QtCore.QRect(0, 0, 461, 261))
+        self.WV_sbbHB.setUrl(QtCore.QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern&suche=true"))
         self.WV_sbbHB.setObjectName("WV_sbbHB")
         self.ST_workerStack.addWidget(self.SC_hb)
         self.SC_wankdorf = QtWidgets.QWidget()
@@ -304,7 +308,7 @@ class Ui_MainWindow(object):
         self.WD_wankdorf.setObjectName("WD_wankdorf")
         self.WV_sbbWankdorf = QtWebKitWidgets.QWebView(self.WD_wankdorf)
         self.WV_sbbWankdorf.setGeometry(QtCore.QRect(0, 0, 461, 251))
-        self.WV_sbbWankdorf.setUrl(QtCore.QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdor"))
+        self.WV_sbbWankdorf.setUrl(QtCore.QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&suche=true"))
         self.WV_sbbWankdorf.setObjectName("WV_sbbWankdorf")
         self.ST_workerStack.addWidget(self.SC_wankdorf)
         self.SC_breitsch = QtWidgets.QWidget()
@@ -313,14 +317,14 @@ class Ui_MainWindow(object):
         self.WD_breitsch.setGeometry(QtCore.QRect(10, 10, 461, 251))
         self.WD_breitsch.setObjectName("WD_breitsch")
         self.WV_sbbBreitsch = QtWebKitWidgets.QWebView(self.WD_breitsch)
-        self.WV_sbbBreitsch.setGeometry(QtCore.QRect(0, 10, 461, 251))
-        self.WV_sbbBreitsch.setUrl(QtCore.QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Wylerbad&nach=Bern+Breitenrainplatz&datum"))
+        self.WV_sbbBreitsch.setGeometry(QtCore.QRect(0, 0, 461, 251))
+        self.WV_sbbBreitsch.setUrl(QtCore.QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Wylerbad&nach=Bern+Breitenrainplatz&suche=true"))
         self.WV_sbbBreitsch.setObjectName("WV_sbbBreitsch")
         self.ST_workerStack.addWidget(self.SC_breitsch)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.ST_workerStack.setCurrentIndex(8)
+        self.ST_workerStack.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -348,3 +352,4 @@ class Ui_MainWindow(object):
         self.BT_breitsch.setText(_translate("MainWindow", "Breitsch"))
 
 from PyQt5 import QtWebKitWidgets
+import clock_rc
