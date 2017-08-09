@@ -181,7 +181,7 @@ if __name__ == '__main__':
     
     ui.ST_workerStack.setCurrentIndex(0)
     ui.BT_openHomeScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(0))
-    ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load('http://www.sbb.ch')
+    ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load('http://www.sbb.ch'))
     ui.BT_openSonosScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(1))
     ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
     ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))
