@@ -166,6 +166,10 @@ if __name__ == '__main__':
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     
+    filepath=os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
+    myUrl=QUrl.fromLocalFile(filepath)
+    ui.WV_clock.load(myUrl)
+    
     myMusicPlayer=SonosInterface(ui)
     
     openBrowser=openBrowserWidget(ui)
