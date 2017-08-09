@@ -128,19 +128,19 @@ class openBrowserWidget():
         ui.ST_workerStack.setCurrentIndex(6)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
-        logging.info(myUrl)
+        logging.error(myUrl)
         ui.WV_sbbHb.load(myUrl)
     def openBreitsch(self):
         ui.ST_workerStack.setCurrentIndex(8)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Wylerbad&nach=Bern+Breitenrainplatz&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
-        logging.info(myUrl)
+        logging.error(myUrl)
         ui.WV_sbbBreitsch.load(myUrl)
     def openWankdorf(self):
         ui.ST_workerStack.setCurrentIndex(7)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
-        logging.info(myUrl)
+        logging.error(myUrl)
         ui.WV_sbbWankdorf.load(myUrl)
     def openMeteo(self):
         myUrl=QUrl("https://m.srf.ch/meteo")
@@ -178,7 +178,7 @@ if __name__ == '__main__':
     logTextBox.setFormatter(logging.Formatter('%(funcName)-12s: %(levelname)-8s %(message)s'))
     logging.getLogger().addHandler(logTextBox)
     # You can control the logging level
-    logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger().setLevel(logging.ERROR)
     
     logging.info('Here we are')
     logging.error('Oops')
