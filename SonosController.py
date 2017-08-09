@@ -146,7 +146,7 @@ class openBrowserWidget():
         myUrl=QUrl("https://m.srf.ch/meteo")
         ui.WV_srfMeteo.load(myUrl)
     def getTimeDate(self):
-        myTime = time.gmtime()
+        myTime = time.localtime()
         myYear=myTime.tm_year
         myMonth=myTime.tm_mon
         myDay=myTime.tm_mday
