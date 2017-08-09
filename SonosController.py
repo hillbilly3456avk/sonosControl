@@ -181,7 +181,9 @@ if __name__ == '__main__':
     
     ui.ST_workerStack.setCurrentIndex(0)
     ui.BT_openHomeScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(0))
-    ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load('http://www.sbb.ch'))
+    filepath=os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
+    myUrl=QUrl.fromLocalFile(filepath)
+    ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load(myUrl))
     ui.BT_openSonosScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(1))
     ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
     ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))
