@@ -89,6 +89,7 @@ class SonosInterface():
     self.myZone[self.activeSpeaker].switch_to_tv()
   def playMusic(self):
     self.myZone[self.activeSpeaker].play()
+    logging.error(self.myZone[self.activeSpeaker].get_music_library_information('artists', search_term='Metallica'))
     logging.error("playing now")
   def stopMusic(self):
     self.myZone[self.activeSpeaker].stop()
@@ -190,7 +191,6 @@ if __name__ == '__main__':
     myUrl=QUrl.fromLocalFile(filepath)
     ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load(myUrl))
     ui.BT_openSonosScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(1))
-    ui.BT_openSonosScreen.clicked.connect(lambda: 
     ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
     ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))
     ui.BT_openMeteoScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(4))
