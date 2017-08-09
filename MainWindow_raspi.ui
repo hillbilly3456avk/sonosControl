@@ -212,7 +212,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>496</width>
+      <width>621</width>
       <height>51</height>
      </rect>
     </property>
@@ -223,6 +223,9 @@
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Ignored</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>

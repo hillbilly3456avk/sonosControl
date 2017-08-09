@@ -128,16 +128,19 @@ class openBrowserWidget():
         ui.ST_workerStack.setCurrentIndex(6)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
+        logging.info(myUrl)
         ui.WV_sbbHb.load(myUrl)
     def openBreitsch(self):
         ui.ST_workerStack.setCurrentIndex(8)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Wylerbad&nach=Bern+Breitenrainplatz&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
+        logging.info(myUrl)
         ui.WV_sbbBreitsch.load(myUrl)
     def openWankdorf(self):
         ui.ST_workerStack.setCurrentIndex(7)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
+        logging.info(myUrl)
         ui.WV_sbbWankdorf.load(myUrl)
     def openMeteo(self):
         myUrl=QUrl("https://m.srf.ch/meteo")
@@ -178,6 +181,7 @@ if __name__ == '__main__':
     
     ui.ST_workerStack.setCurrentIndex(0)
     ui.BT_openHomeScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(0))
+    ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load('http://www.sbb.ch')
     ui.BT_openSonosScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(1))
     ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
     ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))

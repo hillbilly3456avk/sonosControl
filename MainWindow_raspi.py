@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow_raspi.ui'
 #
-# Created by: PyQt5 UI code generator 5.9
+# Created by: PyQt5 UI code generator 5.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -76,14 +76,14 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 496, 51))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 621, 51))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.TopSelectionBar = QtWidgets.QHBoxLayout()
         self.TopSelectionBar.setObjectName("TopSelectionBar")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Minimum)
         self.TopSelectionBar.addItem(spacerItem)
         self.BT_openHomeScreen = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.BT_openHomeScreen.setFlat(True)
