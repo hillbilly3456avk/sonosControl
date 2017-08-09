@@ -865,7 +865,7 @@
        </property>
        <property name="url">
         <url>
-         <string>https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&amp;nach=Bern+Wankdorf&amp;suche=true</string>
+         <string>https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml</string>
         </url>
        </property>
       </widget>
@@ -908,8 +908,6 @@
    <header>QtWebKitWidgets/QWebView</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="clock.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

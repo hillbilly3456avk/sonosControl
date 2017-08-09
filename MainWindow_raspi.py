@@ -307,7 +307,7 @@ class Ui_MainWindow(object):
         self.WD_wankdorf.setObjectName("WD_wankdorf")
         self.WV_sbbWankdorf = QtWebKitWidgets.QWebView(self.WD_wankdorf)
         self.WV_sbbWankdorf.setGeometry(QtCore.QRect(0, 0, 461, 251))
-        self.WV_sbbWankdorf.setUrl(QtCore.QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&suche=true"))
+        self.WV_sbbWankdorf.setUrl(QtCore.QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml"))
         self.WV_sbbWankdorf.setObjectName("WV_sbbWankdorf")
         self.ST_workerStack.addWidget(self.SC_wankdorf)
         self.SC_breitsch = QtWidgets.QWidget()
@@ -351,4 +351,3 @@ class Ui_MainWindow(object):
         self.BT_breitsch.setText(_translate("MainWindow", "Breitsch"))
 
 from PyQt5 import QtWebKitWidgets
-import clock_rc
