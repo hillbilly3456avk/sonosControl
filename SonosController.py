@@ -80,7 +80,7 @@ class SonosInterface():
   artists=''
   activeSpeaker=0
   def __init__(self, ui):
-    SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr="192.168.1.104"))
+    SonosInterface.myZone = list(soco.discover())
     SonosInterface.activeSpeaker = 0
   def getArtists(self):
     SonosInterface.artists=self.myZone[self.activeSpeaker].music_library.get_artists(start=0, max_items=100)
