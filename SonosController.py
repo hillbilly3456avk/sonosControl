@@ -129,7 +129,7 @@ class SonosInterface():
     def selectWohnzimmer(self):
         for speaker in speakers:
             if speaker.player_name=="Wohnzimmer":
-            self.activeSpeaker = 0
+                self.activeSpeaker = 0
 
 class openBrowserWidget():
     def __init__(self, ui):
