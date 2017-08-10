@@ -76,59 +76,60 @@ def createLogger(logFile):
     return logger
 	
 class SonosInterface():
-  myZone=0
-  artists=''
-  activeSpeaker=0
-  def __init__(self, ui):
-    SonosInterface.myZone = list(soco.discover())
-    SonosInterface.activeSpeaker = 0
-  def getArtists(self):
-    SonosInterface.artists=self.myZone[self.activeSpeaker].music_library.get_artists(start=0, max_items=100)
-    #artists=self.myZone[self.activeSpeaker].music_library.get_artists(complete_result=True)
-    for artist in SonosInterface.artists:
-      ui.LW_artists.addItem(artist.title)
-  def addToQueue(self):
-    self.myZone[self.activeSpeaker].clear_queue()
-    self.myZone[self.activeSpeaker].add_to_queue(SonosInterface.artists[ui.LW_artists.currentRow()])
-  def displayMyZone(self):
-    print(self.myZone[self.activeSpeaker])
-  def selectLineIn(self):
-    self.myZone[self.activeSpeaker].switchto_line_in()
-  def selectTv(self):
-    self.myZone[self.activeSpeaker].switch_to_tv()
-  def playMusic(self):
-    self.myZone[self.activeSpeaker].play_from_queue(0)
-  def stopMusic(self):
-    self.myZone[self.activeSpeaker].stop()
-  def muteMusic(self):
-    self.myZone[self.activeSpeaker].mute(True)
-  def pauseMusic(self):
-    self.myZone[self.activeSpeaker].pause()  
-  def skipMusic(self):
-    self.myZone[self.activeSpeaker].next() 
-  def previousMusic(self):
-    self.myZone[self.activeSpeaker].previous()     
-  def setVolume(self, vol):
-    self.myZone[self.activeSpeaker].volume=vol
-  def getVolume(self):
-    return self.myZone[self.activeSpeaker].volume
-  def volumeUp(self):
-    vol=self.myZone[self.activeSpeaker].volume
-    self.myZone[self.activeSpeaker].volume=vol+5
-  def volumeDown(self):
-    vol=self.myZone[self.activeSpeaker].volume
-    vol=min(vol, 0)
-    self.myZone[self.activeSpeaker].volume=vol-5
-  def get_current_track_info(self):
-    info=self.myZone[self.activeSpeaker].get_current_track_info()
-    ui.LB_currentlyPlaying.setText(str(info))
-  def printMyZone(self):
-    for speaker in speakers:
-      print(speaker.player_name, speaker.ip_address)
-  def selectWohnzimmer(self):
-    for speaker in speakers:
-      if speaker.player_name=="Wohnzimmer":
-        self.activeSpeaker = 0
+    myZone=0
+    artists=''
+    activeSpeaker=0
+    def __init__(self, ui):
+        SonosInterface.myZone = list(soco.discover())
+        SonosInterface.activeSpeaker = 0
+    def getArtists(self):
+        #SonosInterface.artists=self.myZone[self.activeSpeaker].music_library.get_artists(start=0, max_items=100)
+        SonosInterface.artists=self.myZone[self.activeSpeaker].music_library.get_artists(complete_result=True)
+        for artist in SonosInterface.artists:
+            ui.LW_artists.addItem(artist.title)
+    def addToQueue(self):
+        self.myZone[self.activeSpeaker].clear_queue()
+        self.myZone[self.activeSpeaker].add_to_queue(SonosInterface.artists[ui.LW_artists.currentRow()])
+    def displayMyZone(self):
+        print(self.myZone[self.activeSpeaker])
+    def selectLineIn(self):
+        self.myZone[self.activeSpeaker].switchto_line_in()
+    def selectTv(self):
+        self.myZone[self.activeSpeaker].switch_to_tv()
+    def playMusic(self):
+        self.myZone[self.activeSpeaker].play_from_queue(0)
+    def stopMusic(self):
+        self.myZone[self.activeSpeaker].stop()
+    def muteMusic(self):
+        self.myZone[self.activeSpeaker].mute(True)
+    def pauseMusic(self):
+        self.myZone[self.activeSpeaker].pause()  
+    def skipMusic(self):
+        self.myZone[self.activeSpeaker].next() 
+    def previousMusic(self):
+        self.myZone[self.activeSpeaker].previous()     
+    def setVolume(self, vol):
+        self.myZone[self.activeSpeaker].volume=vol
+    def getVolume(self):
+        return self.myZone[self.activeSpeaker].volume
+    def volumeUp(self):
+        vol=self.myZone[self.activeSpeaker].volume
+        self.myZone[self.activeSpeaker].volume=vol+5
+    def volumeDown(self):
+        vol=self.myZone[self.activeSpeaker].volume
+        vol=min(vol, 0)
+        self.myZone[self.activeSpeaker].volume=vol-5
+    def get_current_track_info(self):
+        info=self.myZone[self.activeSpeaker].get_current_track_info()
+        ui.LB_currentlyPlayingTitle.setText(str(info["title]))
+        ui.LB_currentlyPlayingArtist.setText(str(info["artist]))
+    def printMyZone(self):
+        for speaker in speakers:
+            print(speaker.player_name, speaker.ip_address)
+    def selectWohnzimmer(self):
+        for speaker in speakers:
+            if speaker.player_name=="Wohnzimmer":
+            self.activeSpeaker = 0
 
 class openBrowserWidget():
     def __init__(self, ui):
@@ -208,7 +209,6 @@ if __name__ == '__main__':
     ui.BT_breitsch.clicked.connect(lambda: openBrowser.openBreitsch())
     ui.BT_wankdorf.clicked.connect(lambda: openBrowser.openWankdorf())
     
-        
     ui.BT_sonosPlay.clicked.connect(lambda: myMusicPlayer.playMusic())
     ui.BT_stop.clicked.connect(lambda: myMusicPlayer.stopMusic())
     ui.BT_pause.clicked.connect(lambda: myMusicPlayer.pauseMusic())
