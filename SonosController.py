@@ -230,6 +230,7 @@ if __name__ == '__main__':
     volume=50
     volume = myMusicPlayer.getVolume()
     ui.SL_volume.setValue(volume)
+    myMusicPlayer.getArtists()
     
     MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
     
