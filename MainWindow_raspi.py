@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow_raspi.ui'
 #
-# Created by: PyQt5 UI code generator 5.6
+# Created by: PyQt5 UI code generator 5.9
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -158,7 +158,7 @@ class Ui_MainWindow(object):
         self.LB_sonosScreen.setGeometry(QtCore.QRect(10, 10, 141, 16))
         self.LB_sonosScreen.setObjectName("LB_sonosScreen")
         self.BT_sonosPlay = QtWidgets.QPushButton(self.SC_sonosScreen)
-        self.BT_sonosPlay.setGeometry(QtCore.QRect(100, 40, 75, 23))
+        self.BT_sonosPlay.setGeometry(QtCore.QRect(60, 40, 75, 23))
         self.BT_sonosPlay.setFlat(True)
         self.BT_sonosPlay.setObjectName("BT_sonosPlay")
         self.SL_volume = QtWidgets.QSlider(self.SC_sonosScreen)
@@ -170,15 +170,15 @@ class Ui_MainWindow(object):
         self.SL_volume.setTickInterval(0)
         self.SL_volume.setObjectName("SL_volume")
         self.BT_pause = QtWidgets.QPushButton(self.SC_sonosScreen)
-        self.BT_pause.setGeometry(QtCore.QRect(100, 80, 75, 23))
+        self.BT_pause.setGeometry(QtCore.QRect(60, 80, 75, 23))
         self.BT_pause.setFlat(True)
         self.BT_pause.setObjectName("BT_pause")
         self.BT_stop = QtWidgets.QPushButton(self.SC_sonosScreen)
-        self.BT_stop.setGeometry(QtCore.QRect(100, 120, 75, 23))
+        self.BT_stop.setGeometry(QtCore.QRect(60, 120, 75, 23))
         self.BT_stop.setFlat(True)
         self.BT_stop.setObjectName("BT_stop")
         self.BT_skip = QtWidgets.QPushButton(self.SC_sonosScreen)
-        self.BT_skip.setGeometry(QtCore.QRect(190, 80, 75, 23))
+        self.BT_skip.setGeometry(QtCore.QRect(110, 80, 75, 23))
         self.BT_skip.setFlat(True)
         self.BT_skip.setObjectName("BT_skip")
         self.LB_currentlyPlaying = QtWidgets.QLabel(self.SC_sonosScreen)
@@ -188,6 +188,9 @@ class Ui_MainWindow(object):
         self.BT_previous.setGeometry(QtCore.QRect(10, 80, 75, 23))
         self.BT_previous.setFlat(True)
         self.BT_previous.setObjectName("BT_previous")
+        self.LW_artists = QtWidgets.QListWidget(self.SC_sonosScreen)
+        self.LW_artists.setGeometry(QtCore.QRect(190, 10, 221, 241))
+        self.LW_artists.setObjectName("LW_artists")
         self.ST_workerStack.addWidget(self.SC_sonosScreen)
         self.SC_weatherScreen = QtWidgets.QWidget()
         self.SC_weatherScreen.setObjectName("SC_weatherScreen")
@@ -323,7 +326,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.ST_workerStack.setCurrentIndex(0)
+        self.ST_workerStack.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

@@ -77,10 +77,19 @@ def createLogger(logFile):
 	
 class SonosInterface():
   myZone=0
+  artists=''
   activeSpeaker=0
   def __init__(self, ui):
-    SonosInterface.myZone = list(soco.discover())
+    SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr="192.168.1.104"))
     SonosInterface.activeSpeaker = 0
+  def getArtists(self):
+    SonosInterface.artists=self.myZone[self.activeSpeaker].music_library.get_artists(start=0, max_items=100)
+    #artists=self.myZone[self.activeSpeaker].music_library.get_artists(complete_result=True)
+    for artist in SonosInterface.artists:
+      ui.LW_artists.addItem(artist.title)
+  def addToQueue(self):
+    self.myZone[self.activeSpeaker].clear_queue()
+    self.myZone[self.activeSpeaker].add_to_queue(SonosInterface.artists[ui.LW_artists.currentRow()])
   def displayMyZone(self):
     print(self.myZone[self.activeSpeaker])
   def selectLineIn(self):
@@ -88,9 +97,7 @@ class SonosInterface():
   def selectTv(self):
     self.myZone[self.activeSpeaker].switch_to_tv()
   def playMusic(self):
-    self.myZone[self.activeSpeaker].play()
-    logging.error(self.myZone[self.activeSpeaker].get_music_library_information('artists', search_term='Metallica'))
-    logging.error("playing now")
+    self.myZone[self.activeSpeaker].play_from_queue(0)
   def stopMusic(self):
     self.myZone[self.activeSpeaker].stop()
   def muteMusic(self):
@@ -208,6 +215,7 @@ if __name__ == '__main__':
     ui.BT_skip.clicked.connect(lambda: myMusicPlayer.skipMusic())
     ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic())
     ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value()))
+    ui.LW_artists.doubleClicked.connect(lambda: myMusicPlayer.addToQueue())
     
     file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
     
