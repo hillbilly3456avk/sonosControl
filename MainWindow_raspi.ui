@@ -433,7 +433,7 @@
      <widget class="QPushButton" name="BT_sonosPlay">
       <property name="geometry">
        <rect>
-        <x>60</x>
+        <x>70</x>
         <y>10</y>
         <width>75</width>
         <height>23</height>
@@ -449,7 +449,7 @@
      <widget class="QPushButton" name="BT_pause">
       <property name="geometry">
        <rect>
-        <x>60</x>
+        <x>70</x>
         <y>40</y>
         <width>75</width>
         <height>23</height>
@@ -465,7 +465,7 @@
      <widget class="QPushButton" name="BT_stop">
       <property name="geometry">
        <rect>
-        <x>60</x>
+        <x>70</x>
         <y>70</y>
         <width>75</width>
         <height>23</height>
@@ -481,7 +481,7 @@
      <widget class="QPushButton" name="BT_skip">
       <property name="geometry">
        <rect>
-        <x>110</x>
+        <x>120</x>
         <y>40</y>
         <width>75</width>
         <height>23</height>
@@ -573,10 +573,10 @@
      <widget class="QSlider" name="SL_volume">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>40</x>
         <y>90</y>
-        <width>191</width>
-        <height>19</height>
+        <width>131</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="orientation">
@@ -594,6 +594,32 @@
       </property>
       <property name="text">
        <string>Artist...</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="BT_volumeUp">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>90</y>
+        <width>21</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+     <widget class="QToolButton" name="BT_volumeDown">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>21</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>...</string>
       </property>
      </widget>
     </widget>

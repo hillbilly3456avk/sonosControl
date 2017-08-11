@@ -76,9 +76,10 @@ def createLogger(logFile):
     return logger
 	
 class SonosInterface():
-    myZone=0
+    myZone = 0
+    activeSpeaker = 0
+    queuePosition = 0
     artists=''
-    activeSpeaker=0
     def __init__(self, ui):
         SonosInterface.myZone = list(soco.discover())
         SonosInterface.activeSpeaker = 0
@@ -90,6 +91,7 @@ class SonosInterface():
     def addToQueue(self):
         self.myZone[self.activeSpeaker].clear_queue()
         self.myZone[self.activeSpeaker].add_to_queue(SonosInterface.artists[ui.LW_artists.currentRow()])
+        SonosInterface.queuePosition = 0
     def displayMyZone(self):
         print(self.myZone[self.activeSpeaker])
     def selectLineIn(self):
@@ -97,7 +99,7 @@ class SonosInterface():
     def selectTv(self):
         self.myZone[self.activeSpeaker].switch_to_tv()
     def playMusic(self):
-        self.myZone[self.activeSpeaker].play_from_queue(0)
+        self.myZone[self.activeSpeaker].play_from_queue(SonosInterface.queuePosition)
     def stopMusic(self):
         self.myZone[self.activeSpeaker].stop()
     def muteMusic(self):
@@ -121,8 +123,9 @@ class SonosInterface():
         self.myZone[self.activeSpeaker].volume=vol-5
     def get_current_track_info(self):
         info=self.myZone[self.activeSpeaker].get_current_track_info()
-        ui.LB_currentlyPlayingTitle.setText(str(info["title]))
-        ui.LB_currentlyPlayingArtist.setText(str(info["artist]))
+        SonosInterface.queuePosition = myZone[self.activeSpeaker].playlist_position()
+        ui.LB_currentlyPlayingTitle.setText(str(info["title"]))
+        ui.LB_currentlyPlayingArtist.setText(str(info["artist"]))
     def printMyZone(self):
         for speaker in speakers:
             print(speaker.player_name, speaker.ip_address)
@@ -176,10 +179,6 @@ if __name__ == '__main__':
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     
-    filepath=os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
-    myUrl=QUrl.fromLocalFile(filepath)
-    ui.WV_clock.load(myUrl)
-    
     myMusicPlayer=SonosInterface(ui)
     
     openBrowser=openBrowserWidget(ui)
@@ -214,13 +213,15 @@ if __name__ == '__main__':
     ui.BT_pause.clicked.connect(lambda: myMusicPlayer.pauseMusic())
     ui.BT_skip.clicked.connect(lambda: myMusicPlayer.skipMusic())
     ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic())
+    ui.BT_volumeUp.clicked.connect(lambda: myMusicPlayer.volumeUp)
+    ui.BT_volumeDown.clicked.connect(lambda: myMusicPlayer.volumeDown)
     ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value()))
     ui.LW_artists.doubleClicked.connect(lambda: myMusicPlayer.addToQueue())
     
-    file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
-    
     '''the clock'''
+    file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
     local_url = QUrl.fromLocalFile(file_path)
+    ui.WV_clock.load(local_url)
     #ui.WD_clock.load(local_url)
     
     myTimer =QtCore.QTimer()
@@ -236,3 +237,4 @@ if __name__ == '__main__':
     
     MainWindow.show()
     sys.exit(app.exec_())
+    
