@@ -191,7 +191,7 @@ if __name__ == '__main__':
         from MainWindow_Host import Ui_MainWindowHost
         print('was here')
     else:
-        from MainWindow_raspi import Ui_MainWindowRaspi
+        from MainWindow_raspi import Ui_MainWindowTarget
     
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle("fusion")
