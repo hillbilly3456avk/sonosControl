@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+import argparse
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QTimer, QUrl
 
-from MainWindow_raspi import Ui_MainWindow
 from PyQt5.QtGui import QDesktopServices
 import sys
 import datetime
@@ -80,8 +80,11 @@ class SonosInterface():
     activeSpeaker = 0
     queuePosition = 0
     artists=''
-    def __init__(self, ui):
-        SonosInterface.myZone = list(soco.discover())
+    def __init__(self, ui, args):
+        if args.host == 'host':
+            SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr='192.168.1.104'))
+        else:
+            SonosInterface.myZone = list(soco.discover())
         SonosInterface.activeSpeaker = 0
     def getArtists(self):
         #SonosInterface.artists=self.myZone[self.activeSpeaker].music_library.get_artists(start=0, max_items=100)
@@ -119,13 +122,14 @@ class SonosInterface():
         self.myZone[self.activeSpeaker].volume=vol+5
     def volumeDown(self):
         vol=self.myZone[self.activeSpeaker].volume
-        vol=min(vol, 0)
+        vol=max(vol, 0)
         self.myZone[self.activeSpeaker].volume=vol-5
     def get_current_track_info(self):
         info=self.myZone[self.activeSpeaker].get_current_track_info()
-        SonosInterface.queuePosition = myZone[self.activeSpeaker].playlist_position()
+        SonosInterface.queuePosition = info["playlist_position"]
         ui.LB_currentlyPlayingTitle.setText(str(info["title"]))
         ui.LB_currentlyPlayingArtist.setText(str(info["artist"]))
+        ui.SL_volume.setValue(self.getVolume())
     def printMyZone(self):
         for speaker in speakers:
             print(speaker.player_name, speaker.ip_address)
@@ -172,14 +176,36 @@ class openBrowserWidget():
     
         
 if __name__ == '__main__':
-    #logger = createLogger("myFirstTask.log")
+
+    parser = argparse.ArgumentParser(description='Sonos Controller')
+    parser.add_argument('--host', nargs='?', const='host', default='target',
+                        help='start the program on host computer (default: start raspberry pi)')
+
+    args = parser.parse_args()
+    if args.host == 'host':
+        logging.error("host detected")
+    else:
+        logging.error("target detected")
+    
+    if args.host == 'host':
+        from MainWindow_Host import Ui_MainWindowHost
+        print('was here')
+    else:
+        from MainWindow_raspi import Ui_MainWindowRaspi
+    
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle("fusion")
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    
+    if args.host == 'host':
+        ui = Ui_MainWindowHost()
+        print('was here')
+    else:
+        ui = Ui_MainWindowTarget()
+    
     ui.setupUi(MainWindow)
     
-    myMusicPlayer=SonosInterface(ui)
+    myMusicPlayer=SonosInterface(ui, args)
     
     openBrowser=openBrowserWidget(ui)
     
@@ -213,20 +239,22 @@ if __name__ == '__main__':
     ui.BT_pause.clicked.connect(lambda: myMusicPlayer.pauseMusic())
     ui.BT_skip.clicked.connect(lambda: myMusicPlayer.skipMusic())
     ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic())
-    ui.BT_volumeUp.clicked.connect(lambda: myMusicPlayer.volumeUp)
-    ui.BT_volumeDown.clicked.connect(lambda: myMusicPlayer.volumeDown)
+    ui.BT_volumeUp.clicked.connect(lambda: myMusicPlayer.volumeUp())
+    ui.BT_volumeDown.clicked.connect(lambda: myMusicPlayer.volumeDown())
     ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value()))
     ui.LW_artists.doubleClicked.connect(lambda: myMusicPlayer.addToQueue())
     
     '''the clock'''
     file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
     local_url = QUrl.fromLocalFile(file_path)
-    ui.WV_clock.load(local_url)
-    #ui.WD_clock.load(local_url)
+    if args.host == 'host':
+        ui.WD_clock.load(local_url)
+    else:
+        ui.WV_clock.load(local_url)
     
     myTimer =QtCore.QTimer()
     myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
-    myTimer.start(6000)
+    myTimer.start(2000)
     
     volume=50
     volume = myMusicPlayer.getVolume()

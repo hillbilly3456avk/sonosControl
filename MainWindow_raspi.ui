@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>MainWindowTarget</class>
+ <widget class="QMainWindow" name="MainWindowTarget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -544,6 +544,15 @@
            </color>
           </brush>
          </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>218</red>
+            <green>218</green>
+            <blue>218</blue>
+           </color>
+          </brush>
+         </colorrole>
         </active>
         <inactive>
          <colorrole role="Text">
@@ -555,6 +564,15 @@
            </color>
           </brush>
          </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>218</red>
+            <green>218</green>
+            <blue>218</blue>
+           </color>
+          </brush>
+         </colorrole>
         </inactive>
         <disabled>
          <colorrole role="Text">
@@ -563,6 +581,15 @@
             <red>120</red>
             <green>120</green>
             <blue>120</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
            </color>
           </brush>
          </colorrole>
@@ -606,7 +633,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>...</string>
+       <string>+</string>
       </property>
      </widget>
      <widget class="QToolButton" name="BT_volumeDown">
@@ -619,7 +646,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>...</string>
+       <string>-</string>
       </property>
      </widget>
     </widget>
