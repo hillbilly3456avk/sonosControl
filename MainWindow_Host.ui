@@ -606,6 +606,45 @@
        <string>currently playing...</string>
       </property>
      </widget>
+     <widget class="QLabel" name="LB_currentlyPlayingPosition">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>160</y>
+        <width>181</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>currently playing...</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="LB_currentlyPlayingTotal">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>180</y>
+        <width>181</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>currently playing...</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="LB_currentlyPlayingCurrentTime">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>200</y>
+        <width>181</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>currently playing...</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="SC_weatherScreen">
      <widget class="QWidget" name="verticalLayoutWidget_2">

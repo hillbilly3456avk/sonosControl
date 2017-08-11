@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'MainWindow_raspi.ui'
+# Form implementation generated from reading ui file 'MainWindow_Raspi.ui'
 #
 # Created by: PyQt5 UI code generator 5.9
 #
@@ -213,6 +213,15 @@ class Ui_MainWindowTarget(object):
         self.BT_volumeDown = QtWidgets.QToolButton(self.SC_sonosScreen)
         self.BT_volumeDown.setGeometry(QtCore.QRect(10, 90, 21, 21))
         self.BT_volumeDown.setObjectName("BT_volumeDown")
+        self.LB_currentlyPlayingPosition = QtWidgets.QLabel(self.SC_sonosScreen)
+        self.LB_currentlyPlayingPosition.setGeometry(QtCore.QRect(10, 160, 181, 16))
+        self.LB_currentlyPlayingPosition.setObjectName("LB_currentlyPlayingPosition")
+        self.LB_currentlyPlayingTotal = QtWidgets.QLabel(self.SC_sonosScreen)
+        self.LB_currentlyPlayingTotal.setGeometry(QtCore.QRect(10, 180, 181, 16))
+        self.LB_currentlyPlayingTotal.setObjectName("LB_currentlyPlayingTotal")
+        self.LB_currentlyPlayingCurrentTime = QtWidgets.QLabel(self.SC_sonosScreen)
+        self.LB_currentlyPlayingCurrentTime.setGeometry(QtCore.QRect(10, 200, 181, 16))
+        self.LB_currentlyPlayingCurrentTime.setObjectName("LB_currentlyPlayingCurrentTime")
         self.ST_workerStack.addWidget(self.SC_sonosScreen)
         self.SC_weatherScreen = QtWidgets.QWidget()
         self.SC_weatherScreen.setObjectName("SC_weatherScreen")
@@ -369,6 +378,9 @@ class Ui_MainWindowTarget(object):
         self.LB_currentlyPlayingArtist.setText(_translate("MainWindowTarget", "Artist..."))
         self.BT_volumeUp.setText(_translate("MainWindowTarget", "+"))
         self.BT_volumeDown.setText(_translate("MainWindowTarget", "-"))
+        self.LB_currentlyPlayingPosition.setText(_translate("MainWindowTarget", "currently playing..."))
+        self.LB_currentlyPlayingTotal.setText(_translate("MainWindowTarget", "currently playing..."))
+        self.LB_currentlyPlayingCurrentTime.setText(_translate("MainWindowTarget", "currently playing..."))
         self.LB_weatherScreen.setText(_translate("MainWindowTarget", "This is the weather screen"))
         self.LB_oldFreezer.setText(_translate("MainWindowTarget", "Temp alter Gefrierschrank"))
         self.LB_newFreezer.setText(_translate("MainWindowTarget", "Temp neuer Gefrierschrank"))

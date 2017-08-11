@@ -102,7 +102,7 @@ class SonosInterface():
     def selectTv(self):
         self.myZone[self.activeSpeaker].switch_to_tv()
     def playMusic(self):
-        self.myZone[self.activeSpeaker].play_from_queue(SonosInterface.queuePosition)
+        self.myZone[self.activeSpeaker].play_from_queue(int(SonosInterface.queuePosition) - 1)
     def stopMusic(self):
         self.myZone[self.activeSpeaker].stop()
     def muteMusic(self):
@@ -129,6 +129,9 @@ class SonosInterface():
         SonosInterface.queuePosition = info["playlist_position"]
         ui.LB_currentlyPlayingTitle.setText(str(info["title"]))
         ui.LB_currentlyPlayingArtist.setText(str(info["artist"]))
+        ui.LB_currentlyPlayingPosition.setText(str(info["playlist_position"]))
+        ui.LB_currentlyPlayingTotal.setText(str(info["duration"]))
+        ui.LB_currentlyPlayingCurrentTime.setText(str(info["position"]))
         ui.SL_volume.setValue(self.getVolume())
     def printMyZone(self):
         for speaker in speakers:
@@ -141,27 +144,38 @@ class SonosInterface():
 class openBrowserWidget():
     def __init__(self, ui):
         Ui=ui
-    def openHb(self):
+    def openHb(self, args):
         ui.ST_workerStack.setCurrentIndex(6)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
-        logging.error(myUrl)
-        ui.WV_sbbHb.load(myUrl)
-    def openBreitsch(self):
+        if args.host == 'host':
+            ui.WD_hb.load(myUrl)
+        else:
+            ui.WV_sbbHb.load(myUrl)
+    def openBreitsch(self, args):
         ui.ST_workerStack.setCurrentIndex(8)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Wylerbad&nach=Bern+Breitenrainplatz&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
         logging.error(myUrl)
-        ui.WV_sbbBreitsch.load(myUrl)
-    def openWankdorf(self):
+        if args.host == 'host':
+            ui.WD_breitsch.load(myUrl)
+        else:
+            ui.WV_sbbBreitsch.load(myUrl)
+    def openWankdorf(self, args):
         ui.ST_workerStack.setCurrentIndex(7)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
         logging.error(myUrl)
-        ui.WV_sbbWankdorf.load(myUrl)
-    def openMeteo(self):
+        if args.host == 'host':
+            ui.WD_wankdorf.load(myUrl)
+        else:
+            ui.WV_sbbWankdorf.load(myUrl)
+    def openMeteo(self, args):
         myUrl=QUrl("https://m.srf.ch/meteo")
-        ui.WV_srfMeteo.load(myUrl)
+        if args.host == 'host':
+            ui.WD_browser.load(myUrl)
+        else:
+            ui.WV_srfMeteo.load(myUrl)
     def getTimeDate(self):
         myTime = time.localtime()
         myYear=myTime.tm_year
@@ -222,17 +236,20 @@ if __name__ == '__main__':
     ui.BT_openHomeScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(0))
     filepath=os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
     myUrl=QUrl.fromLocalFile(filepath)
-    ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load(myUrl))
+    if args.host == 'host':
+        ui.BT_openHomeScreen.clicked.connect(lambda: ui.WD_clock.load(myUrl))
+    else:
+        ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load(myUrl))
     ui.BT_openSonosScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(1))
     ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
     ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))
     ui.BT_openMeteoScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(4))
-    ui.BT_openMeteoScreen.clicked.connect(lambda: openBrowser.openMeteo())
+    ui.BT_openMeteoScreen.clicked.connect(lambda: openBrowser.openMeteo(args))
     ui.BT_openSbbScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(5))
     
-    ui.BT_hb.clicked.connect(lambda: openBrowser.openHb())
-    ui.BT_breitsch.clicked.connect(lambda: openBrowser.openBreitsch())
-    ui.BT_wankdorf.clicked.connect(lambda: openBrowser.openWankdorf())
+    ui.BT_hb.clicked.connect(lambda: openBrowser.openHb(args))
+    ui.BT_breitsch.clicked.connect(lambda: openBrowser.openBreitsch(args))
+    ui.BT_wankdorf.clicked.connect(lambda: openBrowser.openWankdorf(args))
     
     ui.BT_sonosPlay.clicked.connect(lambda: myMusicPlayer.playMusic())
     ui.BT_stop.clicked.connect(lambda: myMusicPlayer.stopMusic())
