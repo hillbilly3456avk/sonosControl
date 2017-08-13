@@ -80,6 +80,8 @@ class SonosInterface():
     activeSpeaker = 0
     queuePosition = 0
     artists=''
+    radioStations=''
+    playMode='music'
     def __init__(self, ui, args):
         if args.host == 'host':
             SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr='192.168.1.104'))
@@ -89,20 +91,38 @@ class SonosInterface():
     def getArtists(self):
         #SonosInterface.artists=self.myZone[self.activeSpeaker].music_library.get_artists(start=0, max_items=100)
         SonosInterface.artists=self.myZone[self.activeSpeaker].music_library.get_artists(complete_result=True)
+        ui.LW_artists.clear()
         for artist in SonosInterface.artists:
             ui.LW_artists.addItem(artist.title)
+    def getRadio(self):
+        SonosInterface.radioStations=self.myZone[self.activeSpeaker].get_favorite_radio_stations(start=0, max_items=100)
+        SonosInterface.radioStations=SonosInterface.radioStations["favorites"]
+        print(SonosInterface.radioStations)
+        ui.LW_artists.clear()
+        for radios in SonosInterface.radioStations:
+            item=radios.get('title')
+            print(item)
+            ui.LW_artists.addItem(item)
     def addToQueue(self):
-        self.myZone[self.activeSpeaker].clear_queue()
-        self.myZone[self.activeSpeaker].add_to_queue(SonosInterface.artists[ui.LW_artists.currentRow()])
-        SonosInterface.queuePosition = 0
+        if SonosInterface.playMode=='music':
+            self.myZone[self.activeSpeaker].clear_queue()
+            self.myZone[self.activeSpeaker].add_to_queue(SonosInterface.artists[ui.LW_artists.currentRow()])
+            SonosInterface.queuePosition = 0
+        if SonosInterface.playMode=='radio':
+            print("we try it hard")
+            print(SonosInterface.radioStations[ui.LW_artists.currentRow()].get('uri'))
+            self.myZone[self.activeSpeaker].play_uri(uri=SonosInterface.radioStations[ui.LW_artists.currentRow()].get('uri'), meta='', title='', start=True)
+            SonosInterface.queuePosition = 0
     def displayMyZone(self):
         print(self.myZone[self.activeSpeaker])
     def selectLineIn(self):
-        self.myZone[self.activeSpeaker].switchto_line_in()
+        self.myZone[self.activeSpeaker].switch_to_line_in()
     def selectTv(self):
         self.myZone[self.activeSpeaker].switch_to_tv()
     def playMusic(self):
         self.myZone[self.activeSpeaker].play_from_queue(int(SonosInterface.queuePosition) - 1)
+    def play(self):
+        self.myZone[self.activeSpeaker].play()
     def stopMusic(self):
         self.myZone[self.activeSpeaker].stop()
     def muteMusic(self):
@@ -133,6 +153,27 @@ class SonosInterface():
         ui.LB_currentlyPlayingTotal.setText(str(info["duration"]))
         ui.LB_currentlyPlayingCurrentTime.setText(str(info["position"]))
         ui.SL_volume.setValue(self.getVolume())
+    def switchMode(self, ui, mode):
+        if mode == 'tv':
+            ui.BT_tvMode.setStyleSheet(" background-color: #22ba40; border: 1px solid black; border-radius: 5px;")
+            ui.BT_musicMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
+            ui.BT_radioMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
+            SonosInterface.playMode='tv'
+            self.selectLineIn()
+            self.play()
+        if mode == 'radio':
+            self.getRadio()
+            ui.BT_radioMode.setStyleSheet(" background-color: #22ba40; border: 1px solid black; border-radius: 5px;")
+            ui.BT_musicMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
+            ui.BT_tvMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
+            SonosInterface.playMode='radio'
+        if mode == 'music':
+            self.getArtists()
+            ui.BT_musicMode.setStyleSheet(" background-color: #22ba40; border: 1px solid black; border-radius: 5px;")
+            ui.BT_radioMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
+            ui.BT_tvMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
+            SonosInterface.playMode='music'
+            #get artists and list them
     def printMyZone(self):
         for speaker in speakers:
             print(speaker.player_name, speaker.ip_address)
@@ -240,12 +281,17 @@ if __name__ == '__main__':
         ui.BT_openHomeScreen.clicked.connect(lambda: ui.WD_clock.load(myUrl))
     else:
         ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load(myUrl))
+    
     ui.BT_openSonosScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(1))
     ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
     ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))
     ui.BT_openMeteoScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(4))
     ui.BT_openMeteoScreen.clicked.connect(lambda: openBrowser.openMeteo(args))
     ui.BT_openSbbScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(5))
+    
+    ui.BT_musicMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "music"))
+    ui.BT_radioMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "radio"))
+    ui.BT_tvMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "tv"))
     
     ui.BT_hb.clicked.connect(lambda: openBrowser.openHb(args))
     ui.BT_breitsch.clicked.connect(lambda: openBrowser.openBreitsch(args))
@@ -276,7 +322,6 @@ if __name__ == '__main__':
     volume=50
     volume = myMusicPlayer.getVolume()
     ui.SL_volume.setValue(volume)
-    myMusicPlayer.getArtists()
     
     MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
     
