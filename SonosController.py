@@ -97,7 +97,7 @@ class SonosInterface():
     def getRadio(self):
         SonosInterface.radioStations=self.myZone[self.activeSpeaker].get_favorite_radio_stations(start=0, max_items=100)
         SonosInterface.radioStations=SonosInterface.radioStations["favorites"]
-        print(SonosInterface.radioStations)
+        print(SonosInterface.radioStations)                
         ui.LW_artists.clear()
         for radios in SonosInterface.radioStations:
             item=radios.get('title')
@@ -111,7 +111,8 @@ class SonosInterface():
         if SonosInterface.playMode=='radio':
             print("we try it hard")
             print(SonosInterface.radioStations[ui.LW_artists.currentRow()].get('uri'))
-            self.myZone[self.activeSpeaker].play_uri(uri=SonosInterface.radioStations[ui.LW_artists.currentRow()].get('uri'), meta='', title='', start=True)
+            #self.myZone[self.activeSpeaker].play_uri(uri=SonosInterface.radioStations[ui.LW_artists.currentRow()].get('uri'), meta='', title='', start=True)
+            self.myZone[self.activeSpeaker].play_uri(uri="http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p", meta='', title='', start=True)
             SonosInterface.queuePosition = 0
     def displayMyZone(self):
         print(self.myZone[self.activeSpeaker])
@@ -261,6 +262,7 @@ if __name__ == '__main__':
     ui.setupUi(MainWindow)
     
     myMusicPlayer=SonosInterface(ui, args)
+    myMusicPlayer.switchMode(ui, 'music')
     
     openBrowser=openBrowserWidget(ui)
     
@@ -291,6 +293,8 @@ if __name__ == '__main__':
     
     ui.BT_musicMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "music"))
     ui.BT_radioMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "radio"))
+    ui.BT_radioMode.setEnabled(False)
+    ui.BT_radioMode.setVisible(False)
     ui.BT_tvMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "tv"))
     
     ui.BT_hb.clicked.connect(lambda: openBrowser.openHb(args))
