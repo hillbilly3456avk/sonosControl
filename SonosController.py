@@ -82,6 +82,20 @@ class SonosInterface():
     artists=''
     radioStations=''
     playMode='music'
+    tunein_service = 'SA_RINCON65031_'
+    meta_template = """
+    <DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/"
+        xmlns:r="urn:schemas-rinconnetworks-com:metadata-1-0/"
+        xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/">
+        <item id="R:0/0/0" parentID="R:0/0" restricted="true">
+            <dc:title>{title}</dc:title>
+            <upnp:class>object.item.audioItem.audioBroadcast</upnp:class>
+            <desc id="cdudn" nameSpace="urn:schemas-rinconnetworks-com:metadata-1-0/">
+                {service}
+            </desc>
+        </item>
+    </DIDL-Lite>' """
     def __init__(self, ui, args):
         if args.host == 'host':
             SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr='192.168.1.104'))
@@ -109,10 +123,13 @@ class SonosInterface():
             self.myZone[self.activeSpeaker].add_to_queue(SonosInterface.artists[ui.LW_artists.currentRow()])
             SonosInterface.queuePosition = 0
         if SonosInterface.playMode=='radio':
-            print("we try it hard")
-            print(SonosInterface.radioStations[ui.LW_artists.currentRow()].get('uri'))
-            #self.myZone[self.activeSpeaker].play_uri(uri=SonosInterface.radioStations[ui.LW_artists.currentRow()].get('uri'), meta='', title='', start=True)
-            self.myZone[self.activeSpeaker].play_uri(uri="http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p", meta='', title='', start=True)
+            uri=SonosInterface.radioStations[ui.LW_artists.currentRow()].get('uri')
+            uri=uri.replace('&', '&amp;')
+            titleunformated=SonosInterface.radioStations[ui.LW_artists.currentRow()].get('title')
+            metadata=SonosInterface.meta_template.format(title=titleunformated, service=SonosInterface.tunein_service)
+            
+            self.myZone[self.activeSpeaker].play_uri(uri, metadata)
+            #self.myZone[self.activeSpeaker].play_uri(uri="http://users.skynet.be/fa046054/home/P22/track06.mp3", meta='', title='', start=True)
             SonosInterface.queuePosition = 0
     def displayMyZone(self):
         print(self.myZone[self.activeSpeaker])
@@ -293,8 +310,8 @@ if __name__ == '__main__':
     
     ui.BT_musicMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "music"))
     ui.BT_radioMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "radio"))
-    ui.BT_radioMode.setEnabled(False)
-    ui.BT_radioMode.setVisible(False)
+    #ui.BT_radioMode.setEnabled(False)
+    #ui.BT_radioMode.setVisible(False)
     ui.BT_tvMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "tv"))
     
     ui.BT_hb.clicked.connect(lambda: openBrowser.openHb(args))
