@@ -338,7 +338,7 @@ if __name__ == '__main__':
     logTextBox.setFormatter(logging.Formatter('%(funcName)-12s: %(levelname)-8s %(message)s'))
     logging.getLogger().addHandler(logTextBox)
     # You can control the logging level
-    logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger().setLevel(logging.ERROR)
     logging.info('Session started')
     
     myMusicPlayer=SonosInterface(ui, args)
