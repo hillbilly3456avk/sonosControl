@@ -337,14 +337,17 @@ class Ui_MainWindowHost(object):
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.BT_hb = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.BT_hb.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 240px; color: #FFFFFF")
         self.BT_hb.setFlat(True)
         self.BT_hb.setObjectName("BT_hb")
         self.gridLayout_2.addWidget(self.BT_hb, 0, 0, 1, 1)
         self.BT_wankdorf = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.BT_wankdorf.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 240px; color: #FFFFFF")
         self.BT_wankdorf.setFlat(True)
         self.BT_wankdorf.setObjectName("BT_wankdorf")
         self.gridLayout_2.addWidget(self.BT_wankdorf, 0, 1, 1, 1)
         self.BT_breitsch = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.BT_breitsch.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 240px; color: #FFFFFF")
         self.BT_breitsch.setFlat(True)
         self.BT_breitsch.setObjectName("BT_breitsch")
         self.gridLayout_2.addWidget(self.BT_breitsch, 0, 2, 1, 1)
@@ -370,7 +373,7 @@ class Ui_MainWindowHost(object):
         MainWindowHost.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindowHost)
-        self.ST_workerStack.setCurrentIndex(1)
+        self.ST_workerStack.setCurrentIndex(5)
         QtCore.QMetaObject.connectSlotsByName(MainWindowHost)
 
     def retranslateUi(self, MainWindowHost):

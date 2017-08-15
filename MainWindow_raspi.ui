@@ -364,7 +364,7 @@
       <x>0</x>
       <y>50</y>
       <width>481</width>
-      <height>271</height>
+      <height>261</height>
      </rect>
     </property>
     <property name="palette">
@@ -405,7 +405,7 @@
      </palette>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QWidget" name="WD_clock" native="true">
@@ -1046,15 +1046,31 @@
      <widget class="QWidget" name="gridLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>9</x>
-        <y>9</y>
+        <x>10</x>
+        <y>10</y>
         <width>461</width>
         <height>251</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="3">
+        <widget class="QPushButton" name="BT_breitsch">
+         <property name="styleSheet">
+          <string notr="true">background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 240px; color: #FFFFFF</string>
+         </property>
+         <property name="text">
+          <string>Breitsch</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0">
         <widget class="QPushButton" name="BT_hb">
+         <property name="styleSheet">
+          <string notr="true">background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 240px; color: #FFFFFF</string>
+         </property>
          <property name="text">
           <string>Bahnhof</string>
          </property>
@@ -1065,18 +1081,11 @@
        </item>
        <item row="0" column="1">
         <widget class="QPushButton" name="BT_wankdorf">
+         <property name="styleSheet">
+          <string notr="true">background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 240px; color: #FFFFFF</string>
+         </property>
          <property name="text">
           <string>Wankdorf</string>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QPushButton" name="BT_breitsch">
-         <property name="text">
-          <string>Breitsch</string>
          </property>
          <property name="flat">
           <bool>true</bool>

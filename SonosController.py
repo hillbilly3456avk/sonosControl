@@ -172,23 +172,26 @@ class SonosInterface():
         ui.SL_volume.setValue(self.getVolume())
     def switchMode(self, ui, mode):
         if mode == 'tv':
-            ui.BT_tvMode.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #000000")
-            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
-            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 41px; min-height: 23px; color: #000000")
+            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 41px; min-height: 23px; color: #FFFFFF")
+            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 41px; min-height: 23px; color: #FFFFFF")
             SonosInterface.playMode='tv'
-            self.selectLineIn()
-            self.play()
+            if args.noSonos=='hasSonos':
+                self.selectLineIn()
+                self.play()
         if mode == 'radio':
-            self.getRadio()
-            ui.BT_radioMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #000000")
-            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
-            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
+            if args.noSonos=='hasSonos':
+                self.getRadio()
+            ui.BT_radioMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 41px; min-height: 23px; color: #000000")
+            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 41px; min-height: 23px; color: #FFFFFF")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 41px; min-height: 23px; color: #FFFFFF")
             SonosInterface.playMode='radio'
         if mode == 'music':
-            self.getArtists()
-            ui.BT_musicMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #000000")
-            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
-            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
+            if args.noSonos=='hasSonos':
+                self.getArtists()
+            ui.BT_musicMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 41px; min-height: 23px; color: #000000")
+            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 41px; min-height: 23px; color: #FFFFFF")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 41px; min-height: 23px; color: #FFFFFF")
             SonosInterface.playMode='music'
             #get artists and list them
     def printMyZone(self):
@@ -331,8 +334,7 @@ if __name__ == '__main__':
     ui.setupUi(MainWindow)
     
     myMusicPlayer=SonosInterface(ui, args)
-    if args.noSonos=='hasSonos':
-        myMusicPlayer.switchMode(ui, 'music')
+    myMusicPlayer.switchMode(ui, 'music')
     
     selectHome=selectTopLevelPage(ui)
     selectHome.selectHome(ui)

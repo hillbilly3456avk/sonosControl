@@ -399,7 +399,7 @@
      </palette>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QWebEngineView" name="WD_clock" native="true">
@@ -997,6 +997,9 @@
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
         <widget class="QPushButton" name="BT_hb">
+         <property name="styleSheet">
+          <string notr="true">background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 240px; color: #FFFFFF</string>
+         </property>
          <property name="text">
           <string>Bahnhof</string>
          </property>
@@ -1007,6 +1010,9 @@
        </item>
        <item row="0" column="1">
         <widget class="QPushButton" name="BT_wankdorf">
+         <property name="styleSheet">
+          <string notr="true">background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 240px; color: #FFFFFF</string>
+         </property>
          <property name="text">
           <string>Wankdorf</string>
          </property>
@@ -1017,6 +1023,9 @@
        </item>
        <item row="0" column="2">
         <widget class="QPushButton" name="BT_breitsch">
+         <property name="styleSheet">
+          <string notr="true">background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 240px; color: #FFFFFF</string>
+         </property>
          <property name="text">
           <string>Breitsch</string>
          </property>
