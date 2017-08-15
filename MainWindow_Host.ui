@@ -399,7 +399,7 @@
      </palette>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QWebEngineView" name="WD_clock" native="true">
@@ -418,13 +418,17 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>10</y>
+        <y>0</y>
         <width>75</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
-       <string>Play</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="C:/Users/vonKaenel/AppData/Local/Continuum/Anaconda3/envs/py35/Library/bin/musicIcons.qrc">
+        <normaloff>:/Icons/D:/100_tmp/github_new/sonosController/play.png</normaloff>:/Icons/D:/100_tmp/github_new/sonosController/play.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -440,7 +444,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Pause</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="C:/Users/vonKaenel/AppData/Local/Continuum/Anaconda3/envs/py35/Library/bin/musicIcons.qrc">
+        <normaloff>:/Icons/D:/100_tmp/github_new/sonosController/pause.png</normaloff>:/Icons/D:/100_tmp/github_new/sonosController/pause.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -450,13 +458,17 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>50</y>
+        <y>60</y>
         <width>75</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
-       <string>Stop</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="C:/Users/vonKaenel/AppData/Local/Continuum/Anaconda3/envs/py35/Library/bin/musicIcons.qrc">
+        <normaloff>:/Icons/D:/100_tmp/github_new/sonosController/stop.png</normaloff>:/Icons/D:/100_tmp/github_new/sonosController/stop.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -472,7 +484,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Next</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="C:/Users/vonKaenel/AppData/Local/Continuum/Anaconda3/envs/py35/Library/bin/musicIcons.qrc">
+        <normaloff>:/Icons/D:/100_tmp/github_new/sonosController/skip.png</normaloff>:/Icons/D:/100_tmp/github_new/sonosController/skip.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -501,7 +517,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Previous</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="C:/Users/vonKaenel/AppData/Local/Continuum/Anaconda3/envs/py35/Library/bin/musicIcons.qrc">
+        <normaloff>:/Icons/D:/100_tmp/github_new/sonosController/rewind.png</normaloff>:/Icons/D:/100_tmp/github_new/sonosController/rewind.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -577,7 +597,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>-</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="C:/Users/vonKaenel/AppData/Local/Continuum/Anaconda3/envs/py35/Library/bin/musicIcons.qrc">
+        <normaloff>:/Icons/D:/100_tmp/github_new/sonosController/reduceVolume.png</normaloff>:/Icons/D:/100_tmp/github_new/sonosController/reduceVolume.png</iconset>
       </property>
      </widget>
      <widget class="QToolButton" name="BT_volumeUp">
@@ -590,7 +614,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>+</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="C:/Users/vonKaenel/AppData/Local/Continuum/Anaconda3/envs/py35/Library/bin/musicIcons.qrc">
+        <normaloff>:/Icons/D:/100_tmp/github_new/sonosController/increaseVolume.png</normaloff>:/Icons/D:/100_tmp/github_new/sonosController/increaseVolume.png</iconset>
       </property>
      </widget>
      <widget class="QLabel" name="LB_currentlyPlayingArtist">
@@ -655,7 +683,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Music</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>music.png</normaloff>music.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -671,7 +703,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Radio</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="C:/Users/vonKaenel/AppData/Local/Continuum/Anaconda3/envs/py35/Library/bin/musicIcons.qrc">
+        <normaloff>:/Icons/D:/100_tmp/github_new/sonosController/radio.png</normaloff>:/Icons/D:/100_tmp/github_new/sonosController/radio.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -778,7 +814,11 @@
        </palette>
       </property>
       <property name="text">
-       <string>TV</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="C:/Users/vonKaenel/AppData/Local/Continuum/Anaconda3/envs/py35/Library/bin/musicIcons.qrc">
+        <normaloff>:/Icons/D:/100_tmp/github_new/sonosController/tv.png</normaloff>:/Icons/D:/100_tmp/github_new/sonosController/tv.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -1084,6 +1124,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="C:/Users/vonKaenel/AppData/Local/Continuum/Anaconda3/envs/py35/Library/bin/musicIcons.qrc"/>
+  <include location="musicIcons.qrc"/>
+ </resources>
  <connections/>
 </ui>

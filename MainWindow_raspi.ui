@@ -405,7 +405,7 @@
      </palette>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="SC_welcomeScreen">
      <widget class="QWidget" name="WD_clock" native="true">
@@ -440,7 +440,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Play</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>play.png</normaloff>play.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -456,7 +460,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Pause</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>pause.png</normaloff>pause.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -472,7 +480,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Stop</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>stop.png</normaloff>stop.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -488,7 +500,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Next</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>skip.png</normaloff>skip.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -517,7 +533,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Previous</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>rewind.png</normaloff>rewind.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -633,7 +653,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>+</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>increaseVolume.png</normaloff>increaseVolume.png</iconset>
       </property>
      </widget>
      <widget class="QToolButton" name="BT_volumeDown">
@@ -646,7 +670,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>-</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>reduceVolume.png</normaloff>reduceVolume.png</iconset>
       </property>
      </widget>
      <widget class="QLabel" name="LB_currentlyPlayingPosition">
@@ -698,7 +726,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Music</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>music.png</normaloff>music.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -805,7 +837,11 @@
        </palette>
       </property>
       <property name="text">
-       <string>TV</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>tv.png</normaloff>tv.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
@@ -821,7 +857,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>Radio</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>radio.png</normaloff>radio.png</iconset>
       </property>
       <property name="flat">
        <bool>true</bool>
