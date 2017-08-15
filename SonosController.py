@@ -302,12 +302,13 @@ class selectTopLevelPage():
         ui.BT_openLogScreen.setStyleSheet    ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #000000")
     
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser(description='Sonos Controller')
     parser.add_argument('--host', nargs='?', const='host', default='target',
                         help='start the program on host computer (default: start raspberry pi)')
     parser.add_argument('--noSonos', nargs='?', const='noSonos', default='hasSonos',
                         help='test mode when no sonos player is available in network (default: sonos available in network)')
+    parser.add_argument('--discover', nargs='?', const='discover', default='noDiscover',
+                        help='discover the network for sonos devices (default: no discovery)')
 
     args = parser.parse_args()
     if args.host == 'host':
