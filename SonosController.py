@@ -122,6 +122,7 @@ class SonosInterface():
             self.myZone[self.activeSpeaker].clear_queue()
             self.myZone[self.activeSpeaker].add_to_queue(SonosInterface.artists[ui.LW_artists.currentRow()])
             SonosInterface.queuePosition = 0
+            self.playMusic()
         if SonosInterface.playMode=='radio':
             uri=SonosInterface.radioStations[ui.LW_artists.currentRow()].get('uri')
             uri=uri.replace('&', '&amp;')
