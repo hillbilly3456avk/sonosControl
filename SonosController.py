@@ -97,13 +97,13 @@ class SonosInterface():
         </item>
     </DIDL-Lite>' """
     def __init__(self, ui, args):
-        if args.host == 'host':
-            SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr='192.168.1.104'))
-        else:
-            SonosInterface.myZone = list(soco.discover())
-        SonosInterface.activeSpeaker = 0
+        if args.noSonos=='hasSonos':
+            if args.host == 'host':
+                SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr='192.168.1.104'))
+            else:
+                SonosInterface.myZone = list(soco.discover())
+            SonosInterface.activeSpeaker = 0
     def getArtists(self):
-        #SonosInterface.artists=self.myZone[self.activeSpeaker].music_library.get_artists(start=0, max_items=100)
         SonosInterface.artists=self.myZone[self.activeSpeaker].music_library.get_artists(complete_result=True)
         ui.LW_artists.clear()
         for artist in SonosInterface.artists:
@@ -129,7 +129,6 @@ class SonosInterface():
             metadata=SonosInterface.meta_template.format(title=titleunformated, service=SonosInterface.tunein_service)
             
             self.myZone[self.activeSpeaker].play_uri(uri, metadata)
-            #self.myZone[self.activeSpeaker].play_uri(uri="http://users.skynet.be/fa046054/home/P22/track06.mp3", meta='', title='', start=True)
             SonosInterface.queuePosition = 0
     def displayMyZone(self):
         print(self.myZone[self.activeSpeaker])
@@ -173,23 +172,23 @@ class SonosInterface():
         ui.SL_volume.setValue(self.getVolume())
     def switchMode(self, ui, mode):
         if mode == 'tv':
-            ui.BT_tvMode.setStyleSheet(" background-color: #22ba40; border: 1px solid black; border-radius: 5px;")
-            ui.BT_musicMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
-            ui.BT_radioMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #000000")
+            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
+            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
             SonosInterface.playMode='tv'
             self.selectLineIn()
             self.play()
         if mode == 'radio':
             self.getRadio()
-            ui.BT_radioMode.setStyleSheet(" background-color: #22ba40; border: 1px solid black; border-radius: 5px;")
-            ui.BT_musicMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
-            ui.BT_tvMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
+            ui.BT_radioMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #000000")
+            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
             SonosInterface.playMode='radio'
         if mode == 'music':
             self.getArtists()
-            ui.BT_musicMode.setStyleSheet(" background-color: #22ba40; border: 1px solid black; border-radius: 5px;")
-            ui.BT_radioMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
-            ui.BT_tvMode.setStyleSheet(" background-color: #ba153b; border: 1px solid black; border-radius: 5px;")
+            ui.BT_musicMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #000000")
+            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 75px; min-height: 23px; color: #FFFFFF")
             SonosInterface.playMode='music'
             #get artists and list them
     def printMyZone(self):
@@ -246,13 +245,66 @@ class openBrowserWidget():
         myCurTime=(str(myHour)+":"+str(myMin))
         return [myDate, myCurTime]
     
+class selectTopLevelPage():
+    def __init__(self, ui):
+        Ui=ui
+    def selectHome(self, ui):
+        ui.ST_workerStack.setCurrentIndex(0)
+        ui.BT_openHomeScreen.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #000000")
+        ui.BT_openSonosScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openWeatherScreen.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
+    def selectSonos(self, ui):
+        print(ui.BT_openHomeScreen.styleSheet())
+        ui.ST_workerStack.setCurrentIndex(1)
+        ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openSonosScreen.setStyleSheet  ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #000000")
+        ui.BT_openWeatherScreen.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
+    def selectFridge(self, ui):
+        ui.ST_workerStack.setCurrentIndex(2)
+        ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openSonosScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openWeatherScreen.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #000000")
+        ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
+    def selectMeteo(self, ui):
+        ui.ST_workerStack.setCurrentIndex(4)
+        ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openSonosScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openWeatherScreen.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #000000")
+        ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
+    def selectSbb(self, ui):
+        ui.ST_workerStack.setCurrentIndex(5)
+        ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openSonosScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openWeatherScreen.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openSbbScreen.setStyleSheet    ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #000000")
+        ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
+    def selectLog(self, ui):
+        ui.ST_workerStack.setCurrentIndex(3)
+        ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openSonosScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openWeatherScreen.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
+        ui.BT_openLogScreen.setStyleSheet    ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #000000")
     
-        
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Sonos Controller')
     parser.add_argument('--host', nargs='?', const='host', default='target',
                         help='start the program on host computer (default: start raspberry pi)')
+    parser.add_argument('--noSonos', nargs='?', const='noSonos', default='hasSonos',
+                        help='test mode when no sonos player is available in network (default: sonos available in network)')
 
     args = parser.parse_args()
     if args.host == 'host':
@@ -279,7 +331,11 @@ if __name__ == '__main__':
     ui.setupUi(MainWindow)
     
     myMusicPlayer=SonosInterface(ui, args)
-    myMusicPlayer.switchMode(ui, 'music')
+    if args.noSonos=='hasSonos':
+        myMusicPlayer.switchMode(ui, 'music')
+    
+    selectHome=selectTopLevelPage(ui)
+    selectHome.selectHome(ui)
     
     openBrowser=openBrowserWidget(ui)
     
@@ -301,17 +357,16 @@ if __name__ == '__main__':
     else:
         ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load(myUrl))
     
-    ui.BT_openSonosScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(1))
-    ui.BT_openWeatherScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(2))
-    ui.BT_openLogScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(3))
-    ui.BT_openMeteoScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(4))
+    ui.BT_openHomeScreen.clicked.connect(lambda: selectHome.selectHome(ui))
+    ui.BT_openSonosScreen.clicked.connect(lambda: selectHome.selectSonos(ui))
+    ui.BT_openWeatherScreen.clicked.connect(lambda: selectHome.selectFridge(ui))
+    ui.BT_openLogScreen.clicked.connect(lambda: selectHome.selectLog(ui))
+    ui.BT_openMeteoScreen.clicked.connect(lambda: selectHome.selectMeteo(ui))
     ui.BT_openMeteoScreen.clicked.connect(lambda: openBrowser.openMeteo(args))
-    ui.BT_openSbbScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(5))
+    ui.BT_openSbbScreen.clicked.connect(lambda: selectHome.selectSbb(ui))
     
     ui.BT_musicMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "music"))
     ui.BT_radioMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "radio"))
-    #ui.BT_radioMode.setEnabled(False)
-    #ui.BT_radioMode.setVisible(False)
     ui.BT_tvMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "tv"))
     
     ui.BT_hb.clicked.connect(lambda: openBrowser.openHb(args))
@@ -337,12 +392,14 @@ if __name__ == '__main__':
         ui.WV_clock.load(local_url)
     
     myTimer =QtCore.QTimer()
-    myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
+    if args.noSonos=='hasSonos':
+        myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
     myTimer.start(2000)
     
     volume=50
-    volume = myMusicPlayer.getVolume()
-    ui.SL_volume.setValue(volume)
+    if args.noSonos=='hasSonos':
+        volume = myMusicPlayer.getVolume()
+        ui.SL_volume.setValue(volume)
     
     MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
     
