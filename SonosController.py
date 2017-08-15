@@ -260,7 +260,6 @@ class selectTopLevelPage():
         ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
     def selectSonos(self, ui):
-        print(ui.BT_openHomeScreen.styleSheet())
         ui.ST_workerStack.setCurrentIndex(1)
         ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSonosScreen.setStyleSheet  ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #000000")
@@ -312,27 +311,27 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     if args.host == 'host':
-        logging.error("host detected")
-    else:
-        logging.error("target detected")
-    
-    if args.host == 'host':
         from MainWindow_Host import Ui_MainWindowHost
-        print('was here')
     else:
         from MainWindow_raspi import Ui_MainWindowTarget
-    
+
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle("fusion")
     MainWindow = QtWidgets.QMainWindow()
     
     if args.host == 'host':
         ui = Ui_MainWindowHost()
-        print('was here')
     else:
         ui = Ui_MainWindowTarget()
     
     ui.setupUi(MainWindow)
+    
+    logTextBox = QPlainTextEditLogger(ui)
+    logTextBox.setFormatter(logging.Formatter('%(funcName)-12s: %(levelname)-8s %(message)s'))
+    logging.getLogger().addHandler(logTextBox)
+    # You can control the logging level
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.info('Session started')
     
     myMusicPlayer=SonosInterface(ui, args)
     myMusicPlayer.switchMode(ui, 'music')
@@ -341,15 +340,6 @@ if __name__ == '__main__':
     selectHome.selectHome(ui)
     
     openBrowser=openBrowserWidget(ui)
-    
-    logTextBox = QPlainTextEditLogger(ui)
-    logTextBox.setFormatter(logging.Formatter('%(funcName)-12s: %(levelname)-8s %(message)s'))
-    logging.getLogger().addHandler(logTextBox)
-    # You can control the logging level
-    logging.getLogger().setLevel(logging.ERROR)
-    
-    logging.info('Here we are')
-    logging.error('Oops')
     
     ui.ST_workerStack.setCurrentIndex(0)
     ui.BT_openHomeScreen.clicked.connect(lambda: ui.ST_workerStack.setCurrentIndex(0))
@@ -394,10 +384,14 @@ if __name__ == '__main__':
     else:
         ui.WV_clock.load(local_url)
     
-    myTimer =QtCore.QTimer()
+    myTimer=QtCore.QTimer()
     if args.noSonos=='hasSonos':
         myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
     myTimer.start(2000)
+    
+    #myHomeScreenTimer=QtCore.QTimer()
+    #myHomeScreenTimer.timeout.connect(lambda: selectHome.selectHome(ui))
+    #myHomeScreenTimer.start(60000)
     
     volume=50
     if args.noSonos=='hasSonos':
