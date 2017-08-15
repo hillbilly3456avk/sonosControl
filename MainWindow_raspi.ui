@@ -739,7 +739,7 @@
      <widget class="QPushButton" name="BT_tvMode">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>110</x>
         <y>230</y>
         <width>41</width>
         <height>23</height>

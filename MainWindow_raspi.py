@@ -259,7 +259,7 @@ class Ui_MainWindowTarget(object):
         self.BT_musicMode.setFlat(True)
         self.BT_musicMode.setObjectName("BT_musicMode")
         self.BT_tvMode = QtWidgets.QPushButton(self.SC_sonosScreen)
-        self.BT_tvMode.setGeometry(QtCore.QRect(120, 230, 41, 23))
+        self.BT_tvMode.setGeometry(QtCore.QRect(110, 230, 41, 23))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(60, 186, 162))
         brush.setStyle(QtCore.Qt.SolidPattern)
