@@ -117,7 +117,7 @@ class SonosInterface():
             item=radios.get('title')
             print(item)
             ui.LW_artists.addItem(item)
-    def addToQueue(self):
+    def addToQueue(self, homeScreenTimer):
         if SonosInterface.playMode=='music':
             self.myZone[self.activeSpeaker].clear_queue()
             self.myZone[self.activeSpeaker].add_to_queue(SonosInterface.artists[ui.LW_artists.currentRow()])
@@ -128,40 +128,50 @@ class SonosInterface():
             uri=uri.replace('&', '&amp;')
             titleunformated=SonosInterface.radioStations[ui.LW_artists.currentRow()].get('title')
             metadata=SonosInterface.meta_template.format(title=titleunformated, service=SonosInterface.tunein_service)
-            
             self.myZone[self.activeSpeaker].play_uri(uri, metadata)
             SonosInterface.queuePosition = 0
+        homeScreenTimer.rearmTimer()
     def displayMyZone(self):
         print(self.myZone[self.activeSpeaker])
     def selectLineIn(self):
         self.myZone[self.activeSpeaker].switch_to_line_in()
-    def selectTv(self):
+    def selectTv(self, homeScreenTimer):
         self.myZone[self.activeSpeaker].switch_to_tv()
-    def playMusic(self):
+        homeScreenTimer.rearmTimer()
+    def playMusic(self, homeScreenTimer):
         self.myZone[self.activeSpeaker].play_from_queue(int(SonosInterface.queuePosition) - 1)
-    def play(self):
+        homeScreenTimer.rearmTimer()
+    def play(self, homeScreenTimer):
         self.myZone[self.activeSpeaker].play()
-    def stopMusic(self):
+        homeScreenTimer.rearmTimer()
+    def stopMusic(self, homeScreenTimer):
         self.myZone[self.activeSpeaker].stop()
+        homeScreenTimer.rearmTimer()
     def muteMusic(self):
         self.myZone[self.activeSpeaker].mute(True)
-    def pauseMusic(self):
-        self.myZone[self.activeSpeaker].pause()  
-    def skipMusic(self):
+    def pauseMusic(self, homeScreenTimer):
+        self.myZone[self.activeSpeaker].pause()
+        homeScreenTimer.rearmTimer()
+    def skipMusic(self, homeScreenTimer):
         self.myZone[self.activeSpeaker].next() 
-    def previousMusic(self):
-        self.myZone[self.activeSpeaker].previous()     
-    def setVolume(self, vol):
+        homeScreenTimer.rearmTimer()
+    def previousMusic(self, homeScreenTimer):
+        self.myZone[self.activeSpeaker].previous()
+        homeScreenTimer.rearmTimer()
+    def setVolume(self, vol, homeScreenTimer):
         self.myZone[self.activeSpeaker].volume=vol
+        homeScreenTimer.rearmTimer()
     def getVolume(self):
         return self.myZone[self.activeSpeaker].volume
-    def volumeUp(self):
+    def volumeUp(self, homeScreenTimer):
         vol=self.myZone[self.activeSpeaker].volume
         self.myZone[self.activeSpeaker].volume=vol+5
-    def volumeDown(self):
+        homeScreenTimer.rearmTimer()
+    def volumeDown(self, homeScreenTimer):
         vol=self.myZone[self.activeSpeaker].volume
         vol=max(vol, 0)
         self.myZone[self.activeSpeaker].volume=vol-5
+        homeScreenTimer.rearmTimer()
     def get_current_track_info(self):
         info=self.myZone[self.activeSpeaker].get_current_track_info()
         SonosInterface.queuePosition = info["playlist_position"]
@@ -171,7 +181,7 @@ class SonosInterface():
         ui.LB_currentlyPlayingTotal.setText(str(info["duration"]))
         ui.LB_currentlyPlayingCurrentTime.setText(str(info["position"]))
         ui.SL_volume.setValue(self.getVolume())
-    def switchMode(self, ui, mode):
+    def switchMode(self, ui, mode, homeScreenTimer):
         if mode == 'tv':
             ui.BT_tvMode.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(tv.png)")
             ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(music.png)")
@@ -194,6 +204,7 @@ class SonosInterface():
             ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(radio.png)")
             ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(tv.png)")
             SonosInterface.playMode='music'
+        homeScreenTimer.rearmTimer()
     def musicIcons(self, ui):
         ui.BT_sonosPlay.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(play.png)")
         ui.BT_pause.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(pause.png)")
@@ -259,7 +270,7 @@ class openBrowserWidget():
 class selectTopLevelPage():
     def __init__(self, ui):
         Ui=ui
-    def selectHome(self, ui):
+    def selectHome(self, ui, homeScreenTimer):
         ui.ST_workerStack.setCurrentIndex(0)
         ui.BT_openHomeScreen.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #000000")
         ui.BT_openSonosScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
@@ -267,7 +278,8 @@ class selectTopLevelPage():
         ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
-    def selectSonos(self, ui):
+        homeScreenTimer.rearmTimer()
+    def selectSonos(self, ui, homeScreenTimer):
         ui.ST_workerStack.setCurrentIndex(1)
         ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSonosScreen.setStyleSheet  ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #000000")
@@ -275,7 +287,8 @@ class selectTopLevelPage():
         ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
-    def selectFridge(self, ui):
+        homeScreenTimer.rearmTimer()
+    def selectFridge(self, ui, homeScreenTimer):
         ui.ST_workerStack.setCurrentIndex(2)
         ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSonosScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
@@ -283,7 +296,8 @@ class selectTopLevelPage():
         ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
-    def selectMeteo(self, ui):
+        homeScreenTimer.rearmTimer()
+    def selectMeteo(self, ui, homeScreenTimer):
         ui.ST_workerStack.setCurrentIndex(4)
         ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSonosScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
@@ -291,7 +305,8 @@ class selectTopLevelPage():
         ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #000000")
         ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
-    def selectSbb(self, ui):
+        homeScreenTimer.rearmTimer()
+    def selectSbb(self, ui, homeScreenTimer):
         ui.ST_workerStack.setCurrentIndex(5)
         ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSonosScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
@@ -299,7 +314,8 @@ class selectTopLevelPage():
         ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSbbScreen.setStyleSheet    ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #000000")
         ui.BT_openLogScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #FFFFFF")
-    def selectLog(self, ui):
+        homeScreenTimer.rearmTimer()
+    def selectLog(self, ui, homeScreenTimer):
         ui.ST_workerStack.setCurrentIndex(3)
         ui.BT_openHomeScreen.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSonosScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
@@ -307,6 +323,16 @@ class selectTopLevelPage():
         ui.BT_openMeteoScreen.setStyleSheet  ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openSbbScreen.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 70px; min-height: 23px; color: #FFFFFF")
         ui.BT_openLogScreen.setStyleSheet    ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 40px; min-height: 23px; color: #000000")
+        homeScreenTimer.rearmTimer()
+    
+class noClickTimer():
+    myHomeScreenTimer=QtCore.QTimer()
+    def __init__(self, ui):
+        self.myHomeScreenTimer.timeout.connect(lambda: selectHome.selectHome(ui, self))
+        self.myHomeScreenTimer.start(30000)
+    def rearmTimer(self):
+        self.myHomeScreenTimer.start(30000)
+        logging.error("timer rearmed")
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Sonos Controller')
@@ -341,12 +367,14 @@ if __name__ == '__main__':
     logging.getLogger().setLevel(logging.ERROR)
     logging.info('Session started')
     
+    homeScreenTimer=noClickTimer(ui)
+    
     myMusicPlayer=SonosInterface(ui, args)
-    myMusicPlayer.switchMode(ui, 'music')
+    myMusicPlayer.switchMode(ui, 'music', homeScreenTimer)
     myMusicPlayer.musicIcons(ui)
     
     selectHome=selectTopLevelPage(ui)
-    selectHome.selectHome(ui)
+    selectHome.selectHome(ui, homeScreenTimer)
     
     openBrowser=openBrowserWidget(ui)
     
@@ -359,31 +387,31 @@ if __name__ == '__main__':
     else:
         ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load(myUrl))
     
-    ui.BT_openHomeScreen.clicked.connect(lambda: selectHome.selectHome(ui))
-    ui.BT_openSonosScreen.clicked.connect(lambda: selectHome.selectSonos(ui))
-    ui.BT_openWeatherScreen.clicked.connect(lambda: selectHome.selectFridge(ui))
-    ui.BT_openLogScreen.clicked.connect(lambda: selectHome.selectLog(ui))
-    ui.BT_openMeteoScreen.clicked.connect(lambda: selectHome.selectMeteo(ui))
+    ui.BT_openHomeScreen.clicked.connect(lambda: selectHome.selectHome(ui, homeScreenTimer))
+    ui.BT_openSonosScreen.clicked.connect(lambda: selectHome.selectSonos(ui, homeScreenTimer))
+    ui.BT_openWeatherScreen.clicked.connect(lambda: selectHome.selectFridge(ui, homeScreenTimer))
+    ui.BT_openLogScreen.clicked.connect(lambda: selectHome.selectLog(ui, homeScreenTimer))
+    ui.BT_openMeteoScreen.clicked.connect(lambda: selectHome.selectMeteo(ui, homeScreenTimer))
     ui.BT_openMeteoScreen.clicked.connect(lambda: openBrowser.openMeteo(args))
-    ui.BT_openSbbScreen.clicked.connect(lambda: selectHome.selectSbb(ui))
+    ui.BT_openSbbScreen.clicked.connect(lambda: selectHome.selectSbb(ui, homeScreenTimer))
     
-    ui.BT_musicMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "music"))
-    ui.BT_radioMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "radio"))
-    ui.BT_tvMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "tv"))
+    ui.BT_musicMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "music", homeScreenTimer))
+    ui.BT_radioMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "radio", homeScreenTimer))
+    ui.BT_tvMode.clicked.connect(lambda: myMusicPlayer.switchMode(ui, "tv", homeScreenTimer))
     
     ui.BT_hb.clicked.connect(lambda: openBrowser.openHb(args))
     ui.BT_breitsch.clicked.connect(lambda: openBrowser.openBreitsch(args))
     ui.BT_wankdorf.clicked.connect(lambda: openBrowser.openWankdorf(args))
     
-    ui.BT_sonosPlay.clicked.connect(lambda: myMusicPlayer.playMusic())
-    ui.BT_stop.clicked.connect(lambda: myMusicPlayer.stopMusic())
-    ui.BT_pause.clicked.connect(lambda: myMusicPlayer.pauseMusic())
-    ui.BT_skip.clicked.connect(lambda: myMusicPlayer.skipMusic())
-    ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic())
-    ui.BT_volumeUp.clicked.connect(lambda: myMusicPlayer.volumeUp())
-    ui.BT_volumeDown.clicked.connect(lambda: myMusicPlayer.volumeDown())
-    ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value()))
-    ui.LW_artists.doubleClicked.connect(lambda: myMusicPlayer.addToQueue())
+    ui.BT_sonosPlay.clicked.connect(lambda: myMusicPlayer.playMusic(homeScreenTimer))
+    ui.BT_stop.clicked.connect(lambda: myMusicPlayer.stopMusic(homeScreenTimer))
+    ui.BT_pause.clicked.connect(lambda: myMusicPlayer.pauseMusic(homeScreenTimer))
+    ui.BT_skip.clicked.connect(lambda: myMusicPlayer.skipMusic(homeScreenTimer))
+    ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic(homeScreenTimer))
+    ui.BT_volumeUp.clicked.connect(lambda: myMusicPlayer.volumeUp(homeScreenTimer))
+    ui.BT_volumeDown.clicked.connect(lambda: myMusicPlayer.volumeDown(homeScreenTimer))
+    ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value(homeScreenTimer)))
+    ui.LW_artists.doubleClicked.connect(lambda: myMusicPlayer.addToQueue(homeScreenTimer))
     
     '''the clock'''
     file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
@@ -397,10 +425,6 @@ if __name__ == '__main__':
     if args.noSonos=='hasSonos':
         myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
     myTimer.start(2000)
-    
-    #myHomeScreenTimer=QtCore.QTimer()
-    #myHomeScreenTimer.timeout.connect(lambda: selectHome.selectHome(ui))
-    #myHomeScreenTimer.start(60000)
     
     volume=50
     if args.noSonos=='hasSonos':
