@@ -332,7 +332,6 @@ class noClickTimer():
         self.myHomeScreenTimer.start(30000)
     def rearmTimer(self):
         self.myHomeScreenTimer.start(30000)
-        logging.error("timer rearmed")
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Sonos Controller')
@@ -412,14 +411,6 @@ if __name__ == '__main__':
     ui.BT_volumeDown.clicked.connect(lambda: myMusicPlayer.volumeDown(homeScreenTimer))
     ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value(homeScreenTimer)))
     ui.LW_artists.doubleClicked.connect(lambda: myMusicPlayer.addToQueue(homeScreenTimer))
-    
-    '''the clock'''
-    file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
-    local_url = QUrl.fromLocalFile(file_path)
-    if args.host == 'host':
-        ui.WD_clock.load(local_url)
-    else:
-        ui.WV_clock.load(local_url)
     
     myTimer=QtCore.QTimer()
     if args.noSonos=='hasSonos':
