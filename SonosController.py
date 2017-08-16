@@ -382,8 +382,10 @@ if __name__ == '__main__':
     filepath=os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
     myUrl=QUrl.fromLocalFile(filepath)
     if args.host == 'host':
+        ui.WD_clock.load(myUrl)
         ui.BT_openHomeScreen.clicked.connect(lambda: ui.WD_clock.load(myUrl))
     else:
+        ui.WV_clock.load(myUrl)
         ui.BT_openHomeScreen.clicked.connect(lambda: ui.WV_clock.load(myUrl))
     
     ui.BT_openHomeScreen.clicked.connect(lambda: selectHome.selectHome(ui, homeScreenTimer))
