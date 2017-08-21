@@ -3,10 +3,10 @@ clean-pyc:
 
 clean-build:
 
-run host:
+host-run:
 	python.exe SonosController.py --host --noSonos
 	
-run target:
+target-run:
 	python34 SonosController.py
 
 qt:
