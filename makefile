@@ -7,7 +7,7 @@ run host:
 	python.exe SonosController.py --host --noSonos
 	
 run target:
-	python.exe SonosController.py --host --noSonos
+	python34 SonosController.py
 
 qt:
 	python.exe -m PyQt5.uic.pyuic MainWindow_Host.ui -o MainWindow_Host.py
