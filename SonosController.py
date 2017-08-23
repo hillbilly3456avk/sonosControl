@@ -183,9 +183,9 @@ class SonosInterface():
         ui.SL_volume.setValue(self.getVolume())
     def switchMode(self, ui, mode, homeScreenTimer):
         if mode == 'tv':
-            ui.BT_tvMode.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(tv.png)")
-            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(music.png)")
-            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(radio.png)")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(icons/tv.png)")
+            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/music.png)")
+            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/radio.png)")
             SonosInterface.playMode='tv'
             if args.noSonos=='hasSonos':
                 self.selectLineIn()
@@ -193,26 +193,26 @@ class SonosInterface():
         if mode == 'radio':
             if args.noSonos=='hasSonos':
                 self.getRadio()
-            ui.BT_radioMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(radio.png)")
-            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(music.png)")
-            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(tv.png)")
+            ui.BT_radioMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(icons/radio.png)")
+            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/music.png)")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/tv.png)")
             SonosInterface.playMode='radio'
         if mode == 'music':
             if args.noSonos=='hasSonos':
                 self.getArtists()
-            ui.BT_musicMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(music.png)")
-            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(radio.png)")
-            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(tv.png)")
+            ui.BT_musicMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(icons/music.png)")
+            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/radio.png)")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/tv.png)")
             SonosInterface.playMode='music'
         homeScreenTimer.rearmTimer()
     def musicIcons(self, ui):
-        ui.BT_sonosPlay.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(play.png)")
-        ui.BT_pause.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(pause.png)")
-        ui.BT_stop.setStyleSheet     ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(stop.png)")
-        ui.BT_skip.setStyleSheet     ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(skip.png)")
-        ui.BT_previous.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(rewind.png)")
-        ui.BT_volumeUp.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(increaseVolume.png)")
-        ui.BT_volumeDown.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(reduceVolume.png)")
+        ui.BT_sonosPlay.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/play.png)")
+        ui.BT_pause.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/pause.png)")
+        ui.BT_stop.setStyleSheet     ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/stop.png)")
+        ui.BT_skip.setStyleSheet     ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/skip.png)")
+        ui.BT_previous.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/rewind.png)")
+        ui.BT_volumeUp.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/increaseVolume.png)")
+        ui.BT_volumeDown.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/reduceVolume.png)")
     def printMyZone(self):
         for speaker in speakers:
             print(speaker.player_name, speaker.ip_address)
