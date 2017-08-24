@@ -99,7 +99,7 @@ class SonosInterface():
     def __init__(self, ui, args):
         if args.noSonos=='hasSonos':
             if args.host == 'host':
-                SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr='192.168.1.104'))
+                SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr='192.168.1.109'))
             else:
                 SonosInterface.myZone = list(soco.discover())
             SonosInterface.activeSpeaker = 0
@@ -329,9 +329,9 @@ class noClickTimer():
     myHomeScreenTimer=QtCore.QTimer()
     def __init__(self, ui):
         self.myHomeScreenTimer.timeout.connect(lambda: selectHome.selectHome(ui, self))
-        self.myHomeScreenTimer.start(30000)
+        self.myHomeScreenTimer.start(300000)
     def rearmTimer(self):
-        self.myHomeScreenTimer.start(30000)
+        self.myHomeScreenTimer.start(300000)
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Sonos Controller')
@@ -411,7 +411,7 @@ if __name__ == '__main__':
     ui.BT_previous.clicked.connect(lambda: myMusicPlayer.previousMusic(homeScreenTimer))
     ui.BT_volumeUp.clicked.connect(lambda: myMusicPlayer.volumeUp(homeScreenTimer))
     ui.BT_volumeDown.clicked.connect(lambda: myMusicPlayer.volumeDown(homeScreenTimer))
-    ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value(homeScreenTimer)))
+    ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value(), homeScreenTimer))
     ui.LW_artists.doubleClicked.connect(lambda: myMusicPlayer.addToQueue(homeScreenTimer))
     
     myTimer=QtCore.QTimer()
@@ -424,7 +424,8 @@ if __name__ == '__main__':
         volume = myMusicPlayer.getVolume()
         ui.SL_volume.setValue(volume)
     
-    MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+    if args.host == 'target':
+        MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
     
     MainWindow.show()
     sys.exit(app.exec_())
