@@ -417,7 +417,7 @@ if __name__ == '__main__':
     myTimer=QtCore.QTimer()
     if args.noSonos=='hasSonos':
         myTimer.timeout.connect(myMusicPlayer.get_current_track_info)
-    myTimer.start(2000)
+    myTimer.start(2001)
     
     volume=50
     if args.noSonos=='hasSonos':
