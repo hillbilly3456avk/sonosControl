@@ -228,6 +228,7 @@ class openBrowserWidget():
         ui.ST_workerStack.setCurrentIndex(6)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
+        logging.info(myUrl)
         if args.host == 'host':
             ui.WD_hb.load(myUrl)
         else:
@@ -236,7 +237,7 @@ class openBrowserWidget():
         ui.ST_workerStack.setCurrentIndex(8)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Wylerbad&nach=Bern+Breitenrainplatz&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
-        logging.error(myUrl)
+        logging.info(myUrl)
         if args.host == 'host':
             ui.WD_breitsch.load(myUrl)
         else:
@@ -245,13 +246,14 @@ class openBrowserWidget():
         ui.ST_workerStack.setCurrentIndex(7)
         timeDate=self.getTimeDate()
         myUrl=QUrl("https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?von=Bern+Breitfeld&nach=Bern+Wankdorf&datum=" + timeDate[0] + "&zeit=" + timeDate[1] + "&suche=true")
-        logging.error(myUrl)
+        logging.info(myUrl)
         if args.host == 'host':
             ui.WD_wankdorf.load(myUrl)
         else:
             ui.WV_sbbWankdorf.load(myUrl)
     def openMeteo(self, args):
         myUrl=QUrl("https://m.srf.ch/meteo")
+        logging.info(myUrl)
         if args.host == 'host':
             ui.WD_browser.load(myUrl)
         else:
