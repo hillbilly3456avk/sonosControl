@@ -74,7 +74,7 @@ def createLogger(logFile):
     logger = logging.getLogger(__name__)
     logger.info('---end of logger create function---')
     return logger
-	
+
 class SonosInterface():
     myZone = 0
     activeSpeaker = 0
@@ -361,9 +361,16 @@ if __name__ == '__main__':
     
     logTextBox = QPlainTextEditLogger(ui)
     logTextBox.setFormatter(logging.Formatter('%(funcName)-12s: %(levelname)-8s %(message)s'))
-    logging.getLogger().addHandler(logTextBox)
+    logger=logging.getLogger()
+    # file handler 
+    fh=logging.FileHandler('spam.log')
+    fh.setLevel(logging.DEBUG)
+    fh.setFormatter(logging.Formatter('%(asctime)s - %(funcName)s - %(levelname)s - %(lineno)d - %(message)s'))
+    # add the handlers
+    logger.addHandler(logTextBox)
+    logger.addHandler(fh)
     # You can control the logging level
-    logging.getLogger().setLevel(logging.ERROR)
+    logger.setLevel(logging.INFO)
     logging.info('Session started')
     
     homeScreenTimer=noClickTimer(ui)
