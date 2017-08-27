@@ -366,7 +366,7 @@ if __name__ == '__main__':
     logger=logging.getLogger()
     # file handler 
     fh=logging.FileHandler('spam.log')
-    fh.setLevel(logging.DEBUG)
+    fh.setLevel(logging.INFO)
     fh.setFormatter(logging.Formatter('%(asctime)s - %(funcName)s - %(levelname)s - %(lineno)d - %(message)s'))
     # add the handlers
     logger.addHandler(logTextBox)
