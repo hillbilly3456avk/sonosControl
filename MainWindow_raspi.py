@@ -501,7 +501,7 @@ class Ui_MainWindowTarget(object):
         self.LB_currentlyPlayingPosition.setText(_translate("MainWindowTarget", "currently playing..."))
         self.LB_currentlyPlayingTotal.setText(_translate("MainWindowTarget", "currently playing..."))
         self.LB_currentlyPlayingCurrentTime.setText(_translate("MainWindowTarget", "currently playing..."))
-        self.BT_select.setText(_translate("MainWindowTarget", "select"))
+        self.BT_select.setText(_translate("MainWindowTarget", "wählen"))
         self.LB_weatherScreen.setText(_translate("MainWindowTarget", "This is the weather screen"))
         self.LB_oldFreezer.setText(_translate("MainWindowTarget", "Temp alter Gefrierschrank"))
         self.LB_newFreezer.setText(_translate("MainWindowTarget", "Temp neuer Gefrierschrank"))
