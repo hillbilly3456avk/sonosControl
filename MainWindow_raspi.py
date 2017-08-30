@@ -333,6 +333,7 @@ class Ui_MainWindowTarget(object):
         sizePolicy.setHeightForWidth(self.BT_select.sizePolicy().hasHeightForWidth())
         self.BT_select.setSizePolicy(sizePolicy)
         self.BT_select.setMaximumSize(QtCore.QSize(40, 16777215))
+        self.BT_select.setFlat(True)
         self.BT_select.setObjectName("BT_select")
         self.horizontalLayout_5.addWidget(self.BT_select)
         self.gridLayout_3.addLayout(self.horizontalLayout_5, 1, 1, 1, 1)

@@ -139,7 +139,7 @@ class SonosInterface():
         self.myZone[self.activeSpeaker].switch_to_tv()
         homeScreenTimer.rearmTimer()
     def playMusic(self, homeScreenTimer):
-        self.myZone[self.activeSpeaker].play_from_queue(int(SonosInterface.queuePosition) - 1)
+        self.myZone[self.activeSpeaker].play_from_queue(int(SonosInterface.queuePosition))
         homeScreenTimer.rearmTimer()
     def play(self, homeScreenTimer):
         self.myZone[self.activeSpeaker].play()
