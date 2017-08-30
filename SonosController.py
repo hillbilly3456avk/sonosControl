@@ -83,7 +83,7 @@ class SonosInterface():
     albums=''
     titles=''
     radioStations=''
-    playMode='music'
+    __playMode='music'
     __listMode='artists'
     __nextListMode='albums'
     __selectedArtist=''
@@ -110,35 +110,31 @@ class SonosInterface():
                 self.myZone = list(soco.discover())
             self.activeSpeaker = 0
     def getListInfo(self, homeScreenTimer):
-        #if self.__listMode is 'artists':
-        #    logging.error('artist mode')
-        #    self.artists=self.myZone[self.activeSpeaker].music_library.get_artists(complete_result=True)
-        #    ui.LW_artists.clear()
-        #    for artist in self.artists:
-        #        ui.LW_artists.addItem(artist.title)
-        #    self.__listMode='artists'
-        #    self.__nextListMode='albums'
-        if self.__nextListMode is 'albums':
-            logging.error('album mode')
-            self.__selectedArtist = ui.LW_artists.currentItem().text()
-            logging.error(self.__selectedArtist)
-            self.albums=self.myZone[self.activeSpeaker].music_library.get_music_library_information('artists', subcategories=[self.__selectedArtist])
-            self.__listMode='albums'
-            self.__nextListMode='titles'
-            ui.LW_artists.clear()
-            for album in self.albums:
-                ui.LW_artists.addItem(album.title)
-        elif self.__nextListMode is 'titles':
-            logging.error('title mode')
-            self.__nextListMode='addToQueue'
-            self.__listMode='titles'
-            self.__selectedAlbum = ui.LW_artists.currentItem().text()            
-            self.titles=self.myZone[self.activeSpeaker].music_library.get_music_library_information('artists', subcategories=[self.__selectedArtist, self.__selectedAlbum])
-            ui.LW_artists.clear()
-            for title in self.titles:
-                ui.LW_artists.addItem(title.title)
-        elif self.__nextListMode is 'addToQueue':
+        if self.__playMode is 'radio':
             self.addToQueue(homeScreenTimer)
+        elif self.__playMode is 'music':
+            if self.__nextListMode is 'albums':
+                logging.error('album mode')
+                self.__selectedArtist = ui.LW_artists.currentItem().text()
+                logging.error(self.__selectedArtist)
+                self.albums=self.myZone[self.activeSpeaker].music_library.get_music_library_information('artists', subcategories=[self.__selectedArtist])
+                self.__listMode='albums'
+                self.__nextListMode='titles'
+                ui.LW_artists.clear()
+                for album in self.albums:
+                    ui.LW_artists.addItem(album.title)
+            elif self.__nextListMode is 'titles':
+                logging.error('title mode')
+                self.__nextListMode='addToQueue'
+                self.__listMode='titles'
+                self.__selectedAlbum = ui.LW_artists.currentItem().text()            
+                self.titles=self.myZone[self.activeSpeaker].music_library.get_music_library_information('artists', subcategories=[self.__selectedArtist, self.__selectedAlbum])
+                ui.LW_artists.clear()
+                for title in self.titles:
+                    ui.LW_artists.addItem(title.title)
+            elif self.__nextListMode is 'addToQueue':
+                self.addToQueue(homeScreenTimer)
+        
         homeScreenTimer.rearmTimer()
     def getArtists(self, homeScreenTimer):
         logging.error('hier auch?')
@@ -173,7 +169,7 @@ class SonosInterface():
             print(item)
             ui.LW_artists.addItem(item)
     def addToQueue(self, homeScreenTimer):
-        if self.playMode=='music':
+        if self.__playMode=='music':
             if self.__listMode is 'artists':
                 logging.error('artist mode')
                 self.myZone[self.activeSpeaker].clear_queue()
@@ -190,7 +186,7 @@ class SonosInterface():
                 self.myZone[self.activeSpeaker].add_to_queue(self.titles[ui.LW_artists.currentRow()])
                 self.queuePosition = 0
             self.playMusic(homeScreenTimer)
-        elif self.playMode=='radio':
+        elif self.__playMode=='radio':
             uri=self.radioStations[ui.LW_artists.currentRow()].get('uri')
             uri=uri.replace('&', '&amp;')
             titleunformated=self.radioStations[ui.LW_artists.currentRow()].get('title')
@@ -253,7 +249,7 @@ class SonosInterface():
             ui.BT_tvMode.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(icons/tv.png)")
             ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/music.png)")
             ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/radio.png)")
-            self.playMode='tv'
+            self.__playMode='tv'
             if args.noSonos=='hasSonos':
                 self.selectLineIn()
                 self.play()
@@ -263,14 +259,14 @@ class SonosInterface():
             ui.BT_radioMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(icons/radio.png)")
             ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/music.png)")
             ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/tv.png)")
-            self.playMode='radio'
+            self.__playMode='radio'
         if mode == 'music':
             if args.noSonos=='hasSonos':
                 self.getArtists(homeScreenTimer)
             ui.BT_musicMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(icons/music.png)")
             ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/radio.png)")
             ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/tv.png)")
-            self.playMode='music'
+            self.__playMode='music'
         homeScreenTimer.rearmTimer()
     def musicIcons(self, ui):
         ui.BT_sonosPlay.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/play.png)")
