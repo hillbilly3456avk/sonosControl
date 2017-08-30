@@ -99,7 +99,7 @@ class SonosInterface():
     def __init__(self, ui, args):
         if args.noSonos=='hasSonos':
             if args.host == 'host':
-                SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr='192.168.1.109'))
+                SonosInterface.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr='192.168.1.118'))
             else:
                 SonosInterface.myZone = list(soco.discover())
             SonosInterface.activeSpeaker = 0
@@ -122,7 +122,7 @@ class SonosInterface():
             self.myZone[self.activeSpeaker].clear_queue()
             self.myZone[self.activeSpeaker].add_to_queue(SonosInterface.artists[ui.LW_artists.currentRow()])
             SonosInterface.queuePosition = 0
-            self.playMusic()
+            self.playMusic(homeScreenTimer)
         if SonosInterface.playMode=='radio':
             uri=SonosInterface.radioStations[ui.LW_artists.currentRow()].get('uri')
             uri=uri.replace('&', '&amp;')
@@ -420,6 +420,7 @@ if __name__ == '__main__':
     ui.BT_volumeDown.clicked.connect(lambda: myMusicPlayer.volumeDown(homeScreenTimer))
     ui.SL_volume.valueChanged.connect(lambda: myMusicPlayer.setVolume(ui.SL_volume.value(), homeScreenTimer))
     ui.LW_artists.doubleClicked.connect(lambda: myMusicPlayer.addToQueue(homeScreenTimer))
+    ui.BT_select.clicked.connect(lambda: myMusicPlayer.addToQueue(homeScreenTimer))
     
     myTimer=QtCore.QTimer()
     if args.noSonos=='hasSonos':
