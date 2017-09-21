@@ -273,7 +273,8 @@ class SonosInterface():
     def musicIcons(self, ui):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         path=dir_path + "/icons/play.png"
-        ui.BT_sonosPlay.setStyleSheet("""background-color: #a8a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(path)""")
+        ui.BT_sonosPlay.setStyleSheet("background-color: #a8a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/pause.png)")
+        ui.BT_sonosPlay.setStyleSheet("image: url(path)")
         ui.BT_pause.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/pause.png)")
         ui.BT_stop.setStyleSheet     ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/stop.png)")
         ui.BT_skip.setStyleSheet     ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/skip.png)")
