@@ -245,8 +245,8 @@ class SonosInterface():
         ui.LB_currentlyPlayingCurrentTime.setText(str(info["position"]))
         ui.SL_volume.setValue(self.getVolume())
     def switchMode(self, ui, mode, homeScreenTimer):
-		dir_path = os.path.dirname(os.path.realpath(__file__))
-		logging.error(dir_path)
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        logging.error(dir_path)
         if mode == 'tv':
             ui.BT_tvMode.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(icons/tv.png)")
             ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/music.png)")
