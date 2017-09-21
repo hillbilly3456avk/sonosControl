@@ -248,9 +248,9 @@ class SonosInterface():
         dir_path = os.path.dirname(os.path.realpath(__file__))
         if mode == 'tv':
             the_path=dir_path
-            ui.BT_tvMode.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(icons/tv.png)")
-            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/music.png)")
-            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/radio.png)")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/tv.png)")
+            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(" + dir_path + "/icons/music.png)")
+            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(" + dir_path + "/icons/radio.png)")
             self.__playMode='tv'
             if args.noSonos=='hasSonos':
                 self.selectLineIn()
@@ -258,30 +258,29 @@ class SonosInterface():
         if mode == 'radio':
             if args.noSonos=='hasSonos':
                 self.getRadio()
-            ui.BT_radioMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(icons/radio.png)")
-            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/music.png)")
-            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/tv.png)")
+            ui.BT_radioMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/radio.png)")
+            ui.BT_musicMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(" + dir_path + "/icons/music.png)")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(" + dir_path + "/icons/tv.png)")
             self.__playMode='radio'
         if mode == 'music':
             if args.noSonos=='hasSonos':
                 self.getArtists(homeScreenTimer)
-            ui.BT_musicMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(icons/music.png)")
-            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/radio.png)")
-            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(icons/tv.png)")
+            ui.BT_musicMode.setStyleSheet("background-color: #e3e3e3; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/music.png)")
+            ui.BT_radioMode.setStyleSheet("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(" + dir_path + "/icons/radio.png)")
+            ui.BT_tvMode.setStyleSheet   ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; min-width: 20px; min-height: 23px; color: #FFFFFF; image: url(" + dir_path + "/icons/tv.png)")
             self.__playMode='music'
         homeScreenTimer.rearmTimer()
     def musicIcons(self, ui):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         path=dir_path + "/icons/play.png"
         logging.error(path)
-        ui.BT_sonosPlay.setStyleSheet("background-color: #a8a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/pause.png)")
-        #   ui.BT_sonosPlay.setStyleSheet("image: url(path)")
-        ui.BT_pause.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/pause.png)")
-        ui.BT_stop.setStyleSheet     ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/stop.png)")
-        ui.BT_skip.setStyleSheet     ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/skip.png)")
-        ui.BT_previous.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/rewind.png)")
-        ui.BT_volumeUp.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/increaseVolume.png)")
-        ui.BT_volumeDown.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(icons/reduceVolume.png)")
+        ui.BT_sonosPlay.setStyleSheet("background-color: #a8a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/play.png)")
+        ui.BT_pause.setStyleSheet    ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/pause.png)")
+        ui.BT_stop.setStyleSheet     ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/stop.png)")
+        ui.BT_skip.setStyleSheet     ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/skip.png)")
+        ui.BT_previous.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/rewind.png)")
+        ui.BT_volumeUp.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/increaseVolume.png)")
+        ui.BT_volumeDown.setStyleSheet ("background-color: #a0a0a0; padding: 0px; border: 0px solid black; margin: 0px; border-radius: 8px; max-width: 30px; min-height: 23px; color: #000000; image: url(" + dir_path + "/icons/reduceVolume.png)")
     def printMyZone(self):
         for speaker in speakers:
             print(speaker.player_name, speaker.ip_address)
