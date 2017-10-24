@@ -88,6 +88,7 @@ class SonosInterface():
     __nextListMode='albums'
     __selectedArtist=''
     __selectedAlbum=''
+    __Widget=''
     tunein_service = 'SA_RINCON65031_'
     meta_template = """
     <DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -102,13 +103,14 @@ class SonosInterface():
             </desc>
         </item>
     </DIDL-Lite>' """
-    def __init__(self, ui, args):
+    def __init__(self, ui, appWidget, args):
         if args.noSonos=='hasSonos':
             if args.host == 'host':
                 self.myZone = list(soco.discover(timeout=5, include_invisible=False, interface_addr='192.168.1.118'))
             else:
                 self.myZone = list(soco.discover())
             self.activeSpeaker = 0
+        self.__Widget=appWidget
     def getListInfo(self, homeScreenTimer):
         if self.__playMode is 'radio':
             self.addToQueue(homeScreenTimer)
@@ -193,7 +195,11 @@ class SonosInterface():
             metadata=self.meta_template.format(title=titleunformated, service=self.tunein_service)
             self.myZone[self.activeSpeaker].play_uri(uri, metadata)
             self.queuePosition = 0
-        homeScreenTimer.rearmTimer()
+        else:
+            logging.error('showWidget start')
+            self.__Widget.show()
+            logging.error('showWidget end')
+        homeScreenTimer.rearmTimer()    
     def displayMyZone(self):
         print(self.myZone[self.activeSpeaker])
     def selectLineIn(self):
@@ -254,7 +260,7 @@ class SonosInterface():
             self.__playMode='tv'
             if args.noSonos=='hasSonos':
                 self.selectLineIn()
-                self.play()
+                self.play(homeScreenTimer)
         if mode == 'radio':
             if args.noSonos=='hasSonos':
                 self.getRadio()
@@ -419,16 +425,20 @@ if __name__ == '__main__':
         from MainWindow_Host import Ui_MainWindowHost
     else:
         from MainWindow_raspi import Ui_MainWindowTarget
+    from Widget_chooseSource import Ui_Info
 
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle("fusion")
     MainWindow = QtWidgets.QMainWindow()
-    
+    InfoWindow = QtWidgets.QDialog()
+       
     if args.host == 'host':
         ui = Ui_MainWindowHost()
     else:
         ui = Ui_MainWindowTarget()
-    
+    wx = Ui_Info()
+    wx.setupUi(InfoWindow)
+        
     ui.setupUi(MainWindow)
     
     logTextBox = QPlainTextEditLogger(ui)
@@ -447,7 +457,7 @@ if __name__ == '__main__':
     
     homeScreenTimer=noClickTimer(ui)
     
-    myMusicPlayer=SonosInterface(ui, args)
+    myMusicPlayer=SonosInterface(ui, InfoWindow, args)
     myMusicPlayer.switchMode(ui, 'music', homeScreenTimer)
     myMusicPlayer.musicIcons(ui)
     
