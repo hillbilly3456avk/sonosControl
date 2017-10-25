@@ -327,22 +327,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="BT_listArtists">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>70</y>
-     <width>254</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>back</string>
-   </property>
-   <property name="flat">
-    <bool>true</bool>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections>

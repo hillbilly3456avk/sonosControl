@@ -111,10 +111,6 @@ class Ui_Info(object):
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem3)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
-        self.BT_listArtists = QtWidgets.QPushButton(Info)
-        self.BT_listArtists.setGeometry(QtCore.QRect(170, 70, 254, 23))
-        self.BT_listArtists.setFlat(True)
-        self.BT_listArtists.setObjectName("BT_listArtists")
 
         self.retranslateUi(Info)
         self.buttonBox.accepted.connect(Info.accept)
@@ -125,5 +121,4 @@ class Ui_Info(object):
         _translate = QtCore.QCoreApplication.translate
         Info.setWindowTitle(_translate("Info", "Info"))
         self.label.setText(_translate("Info", "bitte zuerst Musik oder Radio auswählen"))
-        self.BT_listArtists.setText(_translate("Info", "back"))
 
